@@ -1,0 +1,32 @@
+[16:27:14] [main/INFO]: Setting user: Player515
+[16:27:15] [Client thread/INFO]: LWJGL Version: 2.9.1
+[16:27:19] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:BiomeCompass
+[16:27:20] [Sound Library Loader/INFO]: Sound engine started
+[16:27:21] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
+[16:27:21] [Client thread/INFO]: Created: 256x256 textures/items-atlas
+[16:27:21] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:BiomeCompass
+[16:27:21] [Client thread/INFO]: Created: 256x256 textures/items-atlas
+[16:27:22] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
+[16:27:22] [Sound Library Loader/INFO]: Sound engine started
+[16:27:27] [Server thread/INFO]: Starting integrated minecraft server version 1.7.10
+[16:27:27] [Server thread/INFO]: Generating keypair
+[16:27:27] [Server thread/INFO]: Preparing start region for level 0
+[16:27:28] [Server thread/INFO]: Changing view distance to 12, from 10
+[16:27:29] [Server thread/INFO]: Player515[local:E:a14cab79] logged in with entity id 144 at (-352.898060552109, 85.15635215081488, 4.468603371813057)
+[16:27:29] [Server thread/INFO]: Player515 joined the game
+[16:27:37] [Client thread/INFO]: [CHAT] Unknown command. Try /help for a list of commands
+[16:27:43] [Client thread/INFO]: [CHAT] You are in a Sunflower Plains -353,4
+[16:27:51] [Client thread/INFO]: [CHAT] You are in a Sunflower Plains -353,4
+[16:28:01] [Client thread/INFO]: [CHAT] You are in a Sunflower Plains -353,4
+[16:28:10] [Client thread/INFO]: [CHAT] You are in a Sunflower Plains -353,4
+[16:28:35] [Server thread/INFO]: Saving and pausing game...
+[16:28:35] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[16:28:35] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[16:28:35] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[16:28:37] [Server thread/INFO]: Stopping server
+[16:28:37] [Server thread/INFO]: Saving players
+[16:28:37] [Server thread/INFO]: Saving worlds
+[16:28:37] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[16:28:37] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[16:28:37] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[16:28:38] [Client thread/INFO]: Stopping!
