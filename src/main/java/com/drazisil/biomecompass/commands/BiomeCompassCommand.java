@@ -2,6 +2,7 @@ package com.drazisil.biomecompass.commands;
 
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
@@ -38,29 +39,38 @@ public class BiomeCompassCommand implements ICommand {
     public void processCommand(ICommandSender sender, String[] argString) {
 
         // TODO: Add console handling
-        world = sender.getEntityWorld();
+        if (sender instanceof EntityPlayer){
+            world = sender.getEntityWorld();
 
-        ChunkCoordinates senderChoords = sender.getPlayerCoordinates();
-        int senderX = senderChoords.posX;
-        int senderZ = senderChoords.posZ;
+            ChunkCoordinates senderChoords = sender.getPlayerCoordinates();
+            int senderX = senderChoords.posX;
+            int senderZ = senderChoords.posZ;
 
 
-        if (argString.length > 0) {
+            if (argString.length > 0) {
+                // Was a requested biome name provided?
 
                     /* Some biomes have more then one word in the name.
                     Assume all arguments are part of the name
                      */
-            String requestedBiomeName = StringUtils.join(argString, " ").toLowerCase();
-            scanForBiomeMatch(senderX, senderZ, requestedBiomeName);
+                String requestedBiomeName = StringUtils.join(argString, " ").toLowerCase();
+                scanForBiomeMatch(sender, senderX, senderZ, requestedBiomeName);
+            } else {
+                // Echo the sender's current biome
+                if (!world.isRemote) {
+                    BiomeGenBase senderBiome = world.getBiomeGenForCoords(senderX, senderZ);
+                    sender.addChatMessage(new ChatComponentText("You are in a " + senderBiome.biomeName + " " + senderX + "," + senderZ));
+                }
+
+            }
+
+        } else {
+            sender.addChatMessage(new ChatComponentText("This command can only be run as a player."));
+
         }
 
-        BiomeGenBase senderBiome = world.getBiomeGenForCoords(senderX, senderZ);
 
 
-        if (!world.isRemote) {
-            sender.addChatMessage(new ChatComponentText("You are in a " + senderBiome.biomeName + " " + senderX + "," + senderZ));
-
-        }
     }
 
 
@@ -138,20 +148,27 @@ public class BiomeCompassCommand implements ICommand {
         return 0;
     }
 
-    private void scanForBiomeMatch(int centerX, int centerZ, String requestedBiomeName){
+    private void scanForBiomeMatch(ICommandSender sender, int centerX, int centerZ, String requestedBiomeName){
         boolean success = false;
         for(int i=(centerX - (scanRadius*chunkSize)); i<(centerZ + (scanRadius*chunkSize)); i += chunkSize){
             for(int j=(centerZ - (scanRadius*chunkSize)); j<(centerZ + (scanRadius*chunkSize)); j += chunkSize){
                 String biomeName = world.getBiomeGenForCoords(i, j).biomeName;
                 if (biomeName.toLowerCase().equals(requestedBiomeName)) {
                     success = true;
-                    logger.info(i + "," + j + " = " + biomeName);
+                    //logger.info(i + "," + j + " = " + biomeName);
+                    if (!world.isRemote) {
+                        sender.addChatMessage(new ChatComponentText(i + "," + j + " = " + biomeName));
+                    }
                     return;
                 }
             }
         }
         if (success == false){
-            logger.info("A "+ requestedBiomeName + " biome was not located within the search radius.");
+            //logger.info("A "+ requestedBiomeName + " biome was not located within the search radius.");
+            ChatComponentText msg =new ChatComponentText("A "+ requestedBiomeName
+                    + " biome was not located within the search radius.");
+            sender.addChatMessage(msg);
+
             return;
 
         }
