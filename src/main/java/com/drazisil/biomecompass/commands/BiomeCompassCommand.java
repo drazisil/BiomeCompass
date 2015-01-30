@@ -27,7 +27,11 @@ public class BiomeCompassCommand implements ICommand {
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
-        return "biomecompass";
+        if (sender instanceof EntityPlayer){
+            return "/biomecompass <biome name>";
+        } else {
+            return "biomecompass";
+        }
     }
 
     @Override
