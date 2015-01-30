@@ -24,6 +24,7 @@ archivesBaseName = "BiomeCompass"
 minecraft {
     version = "1.7.10-10.13.2.1291"
     runDir = "eclipse"
+    assetDir = "eclipse/assets"
 }
 
 dependencies {
@@ -60,4 +61,7 @@ processResources
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
+sourceSets {
+    main { output.resourcesDir = output.classesDir }
 }
