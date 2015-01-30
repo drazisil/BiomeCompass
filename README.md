@@ -7,3 +7,5 @@ It uses Forge 1.7.10
 Can be used by players logged in
 
 usage: /biomecompass <biome name>
+
+Reference: http://cmicro.github.io/NeatCraft/forge-javadoc/
