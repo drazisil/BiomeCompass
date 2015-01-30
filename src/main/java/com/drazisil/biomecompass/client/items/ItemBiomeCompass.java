@@ -29,7 +29,6 @@ import net.minecraft.world.World;
 
 public class ItemBiomeCompass extends Item {
 
-    protected String iconString;
     private IIcon[] Textures = new IIcon[4];
 
     public ItemBiomeCompass() {
@@ -56,6 +55,12 @@ public class ItemBiomeCompass extends Item {
     public ItemStack onItemRightClick(ItemStack p_77659_1_, World p_77659_2_, EntityPlayer p_77659_3_)
     {
         return p_77659_1_;
+    }
+
+    public Item setTextureName(String p_111206_1_)
+    {
+        this.iconString = p_111206_1_;
+        return this;
     }
 
 }
