@@ -19,18 +19,20 @@ public class BiomeCompassCommand implements ICommand {
     private World world = null;
     private int chunkSize = 16;
     private int scanRadius = 25;
+    
+    private String commandName = "biomeconpass";
 
     @Override
     public String getCommandName() {
-        return "biomecompass";
+        return commandName;
     }
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
         if (sender instanceof EntityPlayer){
-            return "/biomecompass <biome name>";
+            return "/" + commandName + " <biome name>";
         } else {
-            return "biomecompass";
+            return commandName;
         }
     }
 
@@ -65,18 +67,11 @@ public class BiomeCompassCommand implements ICommand {
                     BiomeGenBase senderBiome = world.getBiomeGenForCoords(senderX, senderZ);
                     sender.addChatMessage(new ChatComponentText("You are in a " + senderBiome.biomeName + " " + senderX + "," + senderZ));
                 }
-
             }
-
         } else {
             sender.addChatMessage(new ChatComponentText("This command can only be run as a player."));
-
         }
-
-
-
     }
-
 
     /**
      * Returns true if the given command sender is allowed to use this command.
@@ -159,7 +154,6 @@ public class BiomeCompassCommand implements ICommand {
                 String biomeName = world.getBiomeGenForCoords(i, j).biomeName;
                 if (biomeName.toLowerCase().equals(requestedBiomeName)) {
                     success = true;
-                    //logger.info(i + "," + j + " = " + biomeName);
                     if (!world.isRemote) {
                         sender.addChatMessage(new ChatComponentText(i + "," + j + " = " + biomeName));
                     }
@@ -174,8 +168,6 @@ public class BiomeCompassCommand implements ICommand {
             sender.addChatMessage(msg);
 
             return;
-
         }
     }
-
 }
