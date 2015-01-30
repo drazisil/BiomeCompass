@@ -8,4 +8,6 @@ Can be used by players logged in
 
 usage: /biomecompass <biome name>
 
-Reference: http://cmicro.github.io/NeatCraft/forge-javadoc/
+Reference: 
+* http://cmicro.github.io/NeatCraft/forge-javadoc/
+* http://www.wuppy29.com/minecraft/modding-tutorials/forge-modding-1-7/
