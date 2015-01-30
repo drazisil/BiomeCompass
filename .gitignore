@@ -2,10 +2,10 @@
 ### Gradle template
 .gradle
 build/
+eclipse/
 
 # Ignore Gradle GUI config
 gradle-app.setting
 
 
 
-eclipse
