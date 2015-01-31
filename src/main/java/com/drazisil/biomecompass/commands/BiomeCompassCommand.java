@@ -32,7 +32,7 @@ public class BiomeCompassCommand extends CommandBase {
     //private static final Logger logger = LogManager.getLogger("BiomeCompass");
     private World world = null;
 
-    private String commandName = "biomeconpass";
+    private String commandName = "biomecompass";
 
     @Override
     public String getCommandName() {
