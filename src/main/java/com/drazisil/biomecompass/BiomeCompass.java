@@ -27,6 +27,8 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 
 @Mod(modid = BiomeCompass.MODID, name = BiomeCompass.NAME, version = BiomeCompass.VERSION)
@@ -46,13 +48,20 @@ public class BiomeCompass
         //FMLCommonHandler.instance().bus().register(events);
         MinecraftForge.EVENT_BUS.register(events);
 
-        ItemBiomeCompass biomeCompassItem = new ItemBiomeCompass();
-        String itemBiomeCompassName = BiomeCompass.MODID + "_biomeCompass";
-        GameRegistry.registerItem(biomeCompassItem, itemBiomeCompassName);
+        //ItemBiomeCompass biomeCompassItem = new ItemBiomeCompass();
+        //String itemBiomeCompassName = BiomeCompass.MODID + "_biomeCompass";
+        //GameRegistry.registerItem(biomeCompassItem, itemBiomeCompassName);
 
         ItemBiomeCompass biomeCompassItem1 = new ItemBiomeCompass1();
         String itemBiomeCompassName1 = BiomeCompass.MODID + "_biomeCompass1";
         GameRegistry.registerItem(biomeCompassItem1, itemBiomeCompassName1);
+
+        // Register the recipe
+        ItemStack compassStack = new ItemStack(Items.compass);
+        ItemStack mapStack = new ItemStack(Items.map);
+
+        GameRegistry.addRecipe(new ItemStack(biomeCompassItem1), " x ", "xyx", " x ",
+                'x', mapStack, 'y', compassStack);
 
     }
 

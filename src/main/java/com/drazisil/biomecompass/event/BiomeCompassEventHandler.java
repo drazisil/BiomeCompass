@@ -66,7 +66,7 @@ public class BiomeCompassEventHandler {
 
 
                     // Check for custom name
-                    logger.info("Clicked with Biome Compass: " + currentEquippedItemStack.getItem().getItemStackDisplayName(currentEquippedItemStack) + " / " + currentEquippedItemStack.hasTagCompound());
+                    //logger.info("Clicked with Biome Compass: " + currentEquippedItemStack.getItem().getItemStackDisplayName(currentEquippedItemStack) + " / " + currentEquippedItemStack.hasTagCompound());
                     if (currentEquippedItemStack.hasTagCompound()){
                         // Has metadata
                         // TODO: Check to make sure matadata is actually the name
