@@ -35,6 +35,8 @@ public class BiomeCompassEventHandler {
 
     private static final Logger logger = LogManager.getLogger("BiomeCompass");
 
+
+
     @SubscribeEvent
     public void playerInteractEvent(PlayerInteractEvent e)
     {
@@ -70,6 +72,7 @@ public class BiomeCompassEventHandler {
                         // TODO: Check to make sure matadata is actually the name
                         NBTTagCompound currentEquippedItemTags = currentEquippedItemStack.getTagCompound();
                         String currentEquippedItemName = currentEquippedItemTags.getCompoundTag("display").getString("Name").toLowerCase();
+                        int scanRadius = ((ItemBiomeCompass) currentEquippedItemStack.getItem()).getScanRadius();
 
 
                         BiomeGenBase[] allBiomes = BiomeGenBase.getBiomeGenArray();
@@ -78,7 +81,7 @@ public class BiomeCompassEventHandler {
                             boolean biomeExists = checkIfBiomeExists(allBiomes, currentEquippedItemName);
                             if (biomeExists){
                                 logger.info(currentEquippedItemName + " is a valid biome");
-                                scanForBiomeMatch(player, senderX, senderZ, currentEquippedItemName);
+                                scanForBiomeMatch(player, senderX, senderZ, scanRadius, currentEquippedItemName);
                             } else {
                                 //logger.info(currentEquippedItemName + " is NOT a valid biome");
                                 player.addChatMessage(new ChatComponentText(currentEquippedItemName + " is not a valid biome. Did you spell it correctly?"));
@@ -96,7 +99,6 @@ public class BiomeCompassEventHandler {
             }
             e.setCanceled(true);
         }
-        e.setCanceled(true);
     }
 
     private boolean checkIfBiomeExists(BiomeGenBase[] allBiomes, String biomeName ){
@@ -115,10 +117,9 @@ public class BiomeCompassEventHandler {
 
     }
 
-    public void scanForBiomeMatch(ICommandSender sender, int centerX, int centerZ, String requestedBiomeName){
-        World world = sender.getEntityWorld();
-        int scanRadius = 25;
+    public void scanForBiomeMatch(ICommandSender sender, int centerX, int centerZ, int scanRadius, String requestedBiomeName){
         int chunkSize = 16;
+        World world = sender.getEntityWorld();
         for(int i=(centerX - (scanRadius * chunkSize)); i<(centerZ + (scanRadius * chunkSize)); i += chunkSize){
             for(int j=(centerZ - (scanRadius * chunkSize)); j<(centerZ + (scanRadius * chunkSize)); j += chunkSize){
                 String biomeName = world.getBiomeGenForCoords(i, j).biomeName;

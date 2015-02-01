@@ -17,6 +17,7 @@
 package com.drazisil.biomecompass;
 
 import com.drazisil.biomecompass.client.items.ItemBiomeCompass;
+import com.drazisil.biomecompass.client.items.ItemBiomeCompass1;
 import com.drazisil.biomecompass.event.BiomeCompassEventHandler;
 import com.drazisil.biomecompass.proxy.BCCommonProxy;
 import cpw.mods.fml.common.Mod;
@@ -35,8 +36,6 @@ public class BiomeCompass
     public static final String NAME = "Biome Compass";
     public static final String VERSION = "1.0";
 
-    protected String itemBiomeCompassName;
-
     @SidedProxy(clientSide = "com.drazisil.biomecompass.proxy.BCClientProxy", serverSide = "com.drazisil.biomecompass.proxy.BCDedicatedServerProxy")
     public static BCCommonProxy proxy;
 
@@ -47,11 +46,14 @@ public class BiomeCompass
         //FMLCommonHandler.instance().bus().register(events);
         MinecraftForge.EVENT_BUS.register(events);
 
-
-
         ItemBiomeCompass biomeCompassItem = new ItemBiomeCompass();
-        itemBiomeCompassName = BiomeCompass.MODID + "_biomeCompass";
+        String itemBiomeCompassName = BiomeCompass.MODID + "_biomeCompass";
         GameRegistry.registerItem(biomeCompassItem, itemBiomeCompassName);
+
+        ItemBiomeCompass biomeCompassItem1 = new ItemBiomeCompass1();
+        String itemBiomeCompassName1 = BiomeCompass.MODID + "_biomeCompass1";
+        GameRegistry.registerItem(biomeCompassItem1, itemBiomeCompassName1);
+
     }
 
 

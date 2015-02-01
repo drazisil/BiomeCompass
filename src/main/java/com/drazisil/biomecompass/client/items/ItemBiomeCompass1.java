@@ -20,35 +20,22 @@ import com.drazisil.biomecompass.BiomeCompass;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-public class ItemBiomeCompass extends Item {
+public class ItemBiomeCompass1 extends ItemBiomeCompass {
 
-    protected static final Logger logger = LogManager.getLogger("BiomeCompass");
+    private IIcon[] Textures = new IIcon[4];
 
-    protected IIcon[] Textures = new IIcon[4];
-
-    public int getScanRadius() {
-        return scanRadius;
-    }
-
-    public void setScanRadius(int scanRadius) {
-        this.scanRadius = scanRadius;
-    }
-
-    private int scanRadius;
-
-    public ItemBiomeCompass() {
-        setUnlocalizedName(BiomeCompass.MODID + "_biomeCompass");
+    public ItemBiomeCompass1() {
+        setUnlocalizedName(BiomeCompass.MODID + "_biomeCompass_1");
         setTextureName(BiomeCompass.MODID + ":biomeCompass_0");
-        //setCreativeTab(CreativeTabs.tabMisc);
-        scanRadius = 1;
+        setCreativeTab(CreativeTabs.tabMisc);
+        setScanRadius(25);
     }
 
     @SideOnly(Side.CLIENT)
