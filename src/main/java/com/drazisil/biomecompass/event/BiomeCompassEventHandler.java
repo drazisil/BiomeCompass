@@ -91,9 +91,7 @@ public class BiomeCompassEventHandler {
 
 
                     } else {
-                        if (!world.isRemote) {
-                            player.addChatMessage(new ChatComponentText("Please activate your compass by renaming it to the biome you are seeking."));
-                        }
+                        player.addChatMessage(new ChatComponentText("Please activate your compass by renaming it to the biome you are seeking."));
                     }
                 }
             }
@@ -120,18 +118,20 @@ public class BiomeCompassEventHandler {
     public void scanForBiomeMatch(ICommandSender sender, int centerX, int centerZ, int scanRadius, String requestedBiomeName){
         int chunkSize = 16;
         World world = sender.getEntityWorld();
+
+        logger.info("Searching " + scanRadius + " chunks around " + centerX + "," + centerZ + " for a " + requestedBiomeName);
+
         for(int i=(centerX - (scanRadius * chunkSize)); i<(centerZ + (scanRadius * chunkSize)); i += chunkSize){
             for(int j=(centerZ - (scanRadius * chunkSize)); j<(centerZ + (scanRadius * chunkSize)); j += chunkSize){
                 String biomeName = world.getBiomeGenForCoords(i, j).biomeName;
                 if (biomeName.toLowerCase().equals(requestedBiomeName)) {
-                    if (!world.isRemote) {
-                        sender.addChatMessage(new ChatComponentText("A " + biomeName + " biome was located at " + i + "," + j));
-                    }
+                    logger.info("A " + biomeName + " biome was located at " + i + "," + j);
+                    sender.addChatMessage(new ChatComponentText("A " + biomeName + " biome was located at " + i + "," + j));
                     return;
                 }
             }
         }
-        //logger.info("A "+ requestedBiomeName + " biome was not located within the search radius.");
+        logger.info("A "+ requestedBiomeName + " biome was not located within the search radius.");
         ChatComponentText msg =new ChatComponentText("A "+ requestedBiomeName
                 + " biome was not located within the search radius.");
         sender.addChatMessage(msg);
