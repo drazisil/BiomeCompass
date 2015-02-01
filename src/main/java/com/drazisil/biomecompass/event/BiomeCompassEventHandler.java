@@ -80,7 +80,8 @@ public class BiomeCompassEventHandler {
                                 logger.info(currentEquippedItemName + " is a valid biome");
                                 scanForBiomeMatch(player, senderX, senderZ, currentEquippedItemName);
                             } else {
-                                logger.info(currentEquippedItemName + " is NOT a valid biome");
+                                //logger.info(currentEquippedItemName + " is NOT a valid biome");
+                                player.addChatMessage(new ChatComponentText(currentEquippedItemName + " is not a valid biome. Did you spell it correctly?"));
                             }
 
                         }
