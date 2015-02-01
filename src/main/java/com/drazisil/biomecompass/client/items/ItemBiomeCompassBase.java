@@ -42,9 +42,17 @@ public class ItemBiomeCompassBase extends Item {
     private int scanRadius = 1;
 
     public ItemBiomeCompassBase() {
+        /*
+        Set name
+         */
         setUnlocalizedName(BiomeCompass.MODID + "_biomeCompass");
+        /*
+        Set texture
+         */
         setTextureName(BiomeCompass.MODID + ":biomeCompass_0");
-        //setCreativeTab(CreativeTabs.tabMisc);
+        /*
+        Set default of 1 chunk around player
+         */
         scanRadius = 1;
     }
 
@@ -71,9 +79,6 @@ public class ItemBiomeCompassBase extends Item {
             return equippedItemStack;
         }
 
-		/*
-         * TODO: find a way for it to not repeat
-		 */
         /*
             Only run on server
              */
