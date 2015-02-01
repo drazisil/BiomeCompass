@@ -17,10 +17,8 @@
 package com.drazisil.biomecompass;
 
 import com.drazisil.biomecompass.client.items.ItemBiomeCompass;
-import com.drazisil.biomecompass.commands.BiomeCompassCommand;
 import com.drazisil.biomecompass.event.BiomeCompassEventHandler;
 import com.drazisil.biomecompass.proxy.BCCommonProxy;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
@@ -46,7 +44,7 @@ public class BiomeCompass
 
     @EventHandler
     public void preinit(FMLPreInitializationEvent event){
-        FMLCommonHandler.instance().bus().register(events);
+        //FMLCommonHandler.instance().bus().register(events);
         MinecraftForge.EVENT_BUS.register(events);
 
 
@@ -66,8 +64,10 @@ public class BiomeCompass
     @EventHandler
     public void serverLoad(FMLServerStartingEvent event)
     {
-        event.registerServerCommand(new BiomeCompassCommand());
+        // com.drazisil.biomecompass.commands.BiomeCompassCommand
+        //event.registerServerCommand(new BiomeCompassCommand());
     }
+
 
 
 }

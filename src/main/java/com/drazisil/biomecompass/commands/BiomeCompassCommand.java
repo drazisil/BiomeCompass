@@ -12,10 +12,12 @@
  *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
- */
+ *//*
+
 
 package com.drazisil.biomecompass.commands;
 
+import com.drazisil.biomecompass.BiomeCompass;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
@@ -68,10 +70,13 @@ public class BiomeCompassCommand extends CommandBase {
             if (argString.length > 0) {
                 // Was a requested biome name provided?
 
-                    /* Some biomes have more then one word in the name.
+                    */
+/* Some biomes have more then one word in the name.
                     Assume all arguments are part of the name
-                     */
+                     *//*
+
                 String requestedBiomeName = StringUtils.join(argString, " ").toLowerCase();
+                BiomeCompass biomeCompass = new BiomeCompass();
                 scanForBiomeMatch(sender, senderX, senderZ, requestedBiomeName);
             } else {
                 // Echo the sender's current biome
@@ -85,56 +90,44 @@ public class BiomeCompassCommand extends CommandBase {
         }
     }
 
-    /**
+    */
+/**
      * Returns true if the given command sender is allowed to use this command.
      *
      * @param sender the ICommandSender that issued the command
-     */
+     *//*
+
     @Override
     public boolean canCommandSenderUseCommand(ICommandSender sender) {
         return true;
     }
 
-    /**
+    */
+/**
      * Adds the strings available in this command to the given list of tab completion options.
      *
      * @param sender the ICommandSender that issued the command
      * @param argString the arguments
-     */
+     *//*
+
     @Override
     public List addTabCompletionOptions(ICommandSender sender, String[] argString) {
         return null;
     }
 
-    /**
+    */
+/**
      * Return whether the specified command parameter index is a username parameter.
      *
      * @param argString the arguments
      * @param index the index of the argument to check
-     */
+     *//*
+
     @Override
     public boolean isUsernameIndex(String[] argString, int index) {
         return false;
     }
 
-    private void scanForBiomeMatch(ICommandSender sender, int centerX, int centerZ, String requestedBiomeName){
-        int scanRadius = 25;
-        int chunkSize = 16;
-        for(int i=(centerX - (scanRadius * chunkSize)); i<(centerZ + (scanRadius * chunkSize)); i += chunkSize){
-            for(int j=(centerZ - (scanRadius * chunkSize)); j<(centerZ + (scanRadius * chunkSize)); j += chunkSize){
-                String biomeName = world.getBiomeGenForCoords(i, j).biomeName;
-                if (biomeName.toLowerCase().equals(requestedBiomeName)) {
-                    if (!world.isRemote) {
-                        sender.addChatMessage(new ChatComponentText(i + "," + j + " = " + biomeName));
-                    }
-                    return;
-                }
-            }
-        }
-        //logger.info("A "+ requestedBiomeName + " biome was not located within the search radius.");
-        ChatComponentText msg =new ChatComponentText("A "+ requestedBiomeName
-                + " biome was not located within the search radius.");
-        sender.addChatMessage(msg);
 
-    }
 }
+*/
