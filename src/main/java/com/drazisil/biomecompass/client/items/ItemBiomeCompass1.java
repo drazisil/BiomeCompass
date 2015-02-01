@@ -21,23 +21,29 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
 
-public class ItemBiomeCompass1 extends ItemBiomeCompass {
+public class ItemBiomeCompass1 extends ItemBiomeCompassBase {
 
-    private IIcon[] Textures = new IIcon[4];
+    public ItemBiomeCompass1(int scanRange) {
+        super();
 
-    public ItemBiomeCompass1() {
+        /*
+         Set name
+          */
         setUnlocalizedName(BiomeCompass.MODID + "_biomeCompass_1");
-        setTextureName(BiomeCompass.MODID + ":biomeCompass_0");
+
+        /*
+         Make available in creative mode
+          */
         setCreativeTab(CreativeTabs.tabMisc);
-        setScanRadius(25);
+
+        /*
+         Override default of 1
+          */
+        setScanRadius(scanRange);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister par1IconRegister)
     {
@@ -48,20 +54,6 @@ public class ItemBiomeCompass1 extends ItemBiomeCompass {
         this.Textures[1] = par1IconRegister.registerIcon(BiomeCompass.MODID + ":biomeCompass_90");
         this.Textures[2] = par1IconRegister.registerIcon(BiomeCompass.MODID + ":biomeCompass_180");
         this.Textures[3] = par1IconRegister.registerIcon(BiomeCompass.MODID + ":biomeCompass_270");
-    }
-
-    /**
-     * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
-     */
-    public ItemStack onItemRightClick(ItemStack p_77659_1_, World p_77659_2_, EntityPlayer p_77659_3_)
-    {
-        return p_77659_1_;
-    }
-
-    public Item setTextureName(String p_111206_1_)
-    {
-        this.iconString = p_111206_1_;
-        return this;
     }
 
 }

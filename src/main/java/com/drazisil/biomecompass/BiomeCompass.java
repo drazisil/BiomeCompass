@@ -16,9 +16,8 @@
 
 package com.drazisil.biomecompass;
 
-import com.drazisil.biomecompass.client.items.ItemBiomeCompass;
 import com.drazisil.biomecompass.client.items.ItemBiomeCompass1;
-import com.drazisil.biomecompass.event.BiomeCompassEventHandler;
+import com.drazisil.biomecompass.client.items.ItemBiomeCompassBase;
 import com.drazisil.biomecompass.proxy.BCCommonProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -29,7 +28,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 
 @Mod(modid = BiomeCompass.MODID, name = BiomeCompass.NAME, version = BiomeCompass.VERSION)
 public class BiomeCompass
@@ -41,22 +40,35 @@ public class BiomeCompass
     @SidedProxy(clientSide = "com.drazisil.biomecompass.proxy.BCClientProxy", serverSide = "com.drazisil.biomecompass.proxy.BCDedicatedServerProxy")
     public static BCCommonProxy proxy;
 
-    BiomeCompassEventHandler events = new BiomeCompassEventHandler();
+    //BiomeCompassEventHandler events = new BiomeCompassEventHandler();
 
     @EventHandler
-    public void preinit(FMLPreInitializationEvent event){
+    public void preInitialization(FMLPreInitializationEvent event){
+        /*
+        Not currently using events at the global level, but leaving the code for reference
+         */
         //FMLCommonHandler.instance().bus().register(events);
-        MinecraftForge.EVENT_BUS.register(events);
+        //MinecraftForge.EVENT_BUS.register(events);
 
-        //ItemBiomeCompass biomeCompassItem = new ItemBiomeCompass();
-        //String itemBiomeCompassName = BiomeCompass.MODID + "_biomeCompass";
-        //GameRegistry.registerItem(biomeCompassItem, itemBiomeCompassName);
+        /*
+        Get the configuration
+         */
+        Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 
-        ItemBiomeCompass biomeCompassItem1 = new ItemBiomeCompass1();
+        config.load();
+        int scanRange_1 = config.get("general", "scanRance_1", 25).getInt(25);
+        config.save();
+
+        /*
+        Registering the item
+         */
+        ItemBiomeCompassBase biomeCompassItem1 = new ItemBiomeCompass1(scanRange_1);
         String itemBiomeCompassName1 = BiomeCompass.MODID + "_biomeCompass1";
         GameRegistry.registerItem(biomeCompassItem1, itemBiomeCompassName1);
 
-        // Register the recipe
+        /*
+         Register the recipe
+          */
         ItemStack compassStack = new ItemStack(Items.compass);
         ItemStack mapStack = new ItemStack(Items.map);
 
@@ -69,14 +81,18 @@ public class BiomeCompass
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-		// some example code
+		/*
+		Not currently using
+		 */
+
     }
 
     @EventHandler
     public void serverLoad(FMLServerStartingEvent event)
     {
-        // com.drazisil.biomecompass.commands.BiomeCompassCommand
-        //event.registerServerCommand(new BiomeCompassCommand());
+		/*
+		Not currently using
+		 */
     }
 
 
