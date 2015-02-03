@@ -56,7 +56,7 @@ public class BiomeCompass
         Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 
         config.load();
-        int scanRange_1 = config.get("general", "scanRance_1", 25).getInt(25);
+        int scanRange_1 = config.get("general", "scanRange_1", 25).getInt(25);
         config.save();
 
         /*
