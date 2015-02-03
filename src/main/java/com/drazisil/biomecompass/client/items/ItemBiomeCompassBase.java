@@ -172,7 +172,7 @@ public class ItemBiomeCompassBase extends Item {
     }
 
 
-    public void scanForBiomeMatch(EntityPlayer player, int centerX, int centerZ, int scanRadius, String requestedBiomeName){
+    protected void scanForBiomeMatch(EntityPlayer player, int centerX, int centerZ, int scanRadius, String requestedBiomeName){
         int chunkSize = 16;
         World world = player.getEntityWorld();
 
@@ -183,6 +183,9 @@ public class ItemBiomeCompassBase extends Item {
                 String biomeName = world.getBiomeGenForCoords(i, j).biomeName;
                 if (biomeName.toLowerCase().equals(requestedBiomeName)) {
                     logger.info("A " + biomeName + " biome was located at " + i + "," + j);
+                    if (hasTP()){
+                        tpPlayertoBiome(player, i, j);
+                    }
                     player.addChatMessage(new ChatComponentText("A " + biomeName + " biome was located at " + i + "," + j));
                     return;
                 }
@@ -195,5 +198,21 @@ public class ItemBiomeCompassBase extends Item {
 
     }
 
+    protected boolean hasTP(){
+        return false;
+    }
+
+
+    protected void tpPlayertoBiome(EntityPlayer player, int x, int z){
+        int safeY = player.getEntityWorld().getTopSolidOrLiquidBlock(x, z);
+        if (player.worldObj.getBlock(x, safeY, z).isAir(player.worldObj, x, safeY, z)){
+            logger.info("y=" + safeY + " may be a safe place.");
+            player.setPosition(x, safeY, z);
+
+        } else {
+            logger.info("y=" + safeY + " may be a safe place....but it's registered as not air.");
+        }
+
+    }
 
 }

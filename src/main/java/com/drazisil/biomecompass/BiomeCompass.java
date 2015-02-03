@@ -17,6 +17,7 @@
 package com.drazisil.biomecompass;
 
 import com.drazisil.biomecompass.client.items.ItemBiomeCompass1;
+import com.drazisil.biomecompass.client.items.ItemBiomeCompass2;
 import com.drazisil.biomecompass.client.items.ItemBiomeCompassBase;
 import com.drazisil.biomecompass.proxy.BCCommonProxy;
 import cpw.mods.fml.common.Mod;
@@ -75,6 +76,21 @@ public class BiomeCompass
         GameRegistry.addRecipe(new ItemStack(biomeCompassItem1), " x ", "xyx", " x ",
                 'x', mapStack, 'y', compassStack);
 
+        /*
+        Registering the item
+         */
+        ItemBiomeCompassBase biomeCompassItem2 = new ItemBiomeCompass2(scanRange_1);
+        String itemBiomeCompassName2 = BiomeCompass.MODID + "_biomeCompass2";
+        GameRegistry.registerItem(biomeCompassItem2, itemBiomeCompassName2);
+
+        /*
+         Register the recipe
+          */
+        ItemStack biomeCompassStack = new ItemStack(biomeCompassItem1);
+        ItemStack enderPearlStack = new ItemStack(Items.ender_pearl);
+
+        GameRegistry.addRecipe(new ItemStack(biomeCompassItem2), " x ", "xyx", " x ",
+                'x', enderPearlStack, 'y', biomeCompassStack);
     }
 
 
