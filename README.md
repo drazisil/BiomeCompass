@@ -7,7 +7,6 @@ It uses Forge 1.7.10
 Reference: 
 * http://cmicro.github.io/NeatCraft/forge-javadoc/
 * http://www.wuppy29.com/minecraft/modding-tutorials/forge-modding-1-7/
-* 
 
 Credit:
 * Compass icon: Xander_Fury
