@@ -1,7 +1,11 @@
 # Created by .ignore support plugin (hsz.mobi)
 ### Gradle template
 .gradle
-build/
+build/classes
+build/dependency-cache
+build/natives
+build/sources
+build/classes
 eclipse/
 
 # Ignore Gradle GUI config

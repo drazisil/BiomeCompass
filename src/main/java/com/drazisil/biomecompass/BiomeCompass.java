@@ -27,11 +27,12 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 
-@Mod(modid = BiomeCompass.MODID, name = BiomeCompass.NAME, version = BiomeCompass.VERSION)
+@Mod(modid = BiomeCompass.MODID, name = BiomeCompass.NAME, version = BiomeCompass.VERSION, acceptableRemoteVersions = "*")
 public class BiomeCompass
 {
     public static final String MODID = "biomecompass";
@@ -87,10 +88,11 @@ public class BiomeCompass
          Register the recipe
           */
         ItemStack biomeCompassStack = new ItemStack(biomeCompassItem1);
-        ItemStack enderPearlStack = new ItemStack(Items.ender_pearl);
+        ItemStack enderEyeStack = new ItemStack(Items.ender_eye);
+        ItemStack obsidianStack = new ItemStack(Blocks.obsidian);
 
-        GameRegistry.addRecipe(new ItemStack(biomeCompassItem2), " x ", "xyx", " x ",
-                'x', enderPearlStack, 'y', biomeCompassStack);
+        GameRegistry.addRecipe(new ItemStack(biomeCompassItem2), "zxz", "xyx", "zxz",
+                'x', enderEyeStack, 'y', biomeCompassStack, 'z', obsidianStack);
     }
 
 
