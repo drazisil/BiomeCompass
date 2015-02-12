@@ -4,3 +4,7 @@ language.code=en_US
 
 item.biomecompass_biomeCompass_1.name=Biome Compass Basic
 item.biomecompass_biomeCompass_2.name=Biome Compass TP
+item.biomecompass_amalgampearl_flora.name=Flora Amalgam
+item.biomecompass_amalgampearl_fauna.name=Fauna Amalgam
+item.biomecompass_amalgampearl_earthen.name=Earthen Amalgam
+item.biomecompass_amalgampearl_precious.name=Precious Amalgam

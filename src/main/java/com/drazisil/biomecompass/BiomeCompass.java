@@ -16,9 +16,6 @@
 
 package com.drazisil.biomecompass;
 
-import com.drazisil.biomecompass.client.items.ItemBiomeCompass1;
-import com.drazisil.biomecompass.client.items.ItemBiomeCompass2;
-import com.drazisil.biomecompass.client.items.ItemBiomeCompassBase;
 import com.drazisil.biomecompass.proxy.BCCommonProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -26,11 +23,6 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Configuration;
 
 @Mod(modid = BiomeCompass.MODID, name = BiomeCompass.NAME, version = BiomeCompass.VERSION)
 public class BiomeCompass
@@ -46,71 +38,20 @@ public class BiomeCompass
 
     @EventHandler
     public void preInitialization(FMLPreInitializationEvent event){
-        /*
-        Not currently using events at the global level, but leaving the code for reference
-         */
-        //FMLCommonHandler.instance().bus().register(events);
-        //MinecraftForge.EVENT_BUS.register(events);
-
-        /*
-        Get the configuration
-         */
-        Configuration config = new Configuration(event.getSuggestedConfigurationFile());
-
-        config.load();
-        int scanRange_1 = config.get("general", "scanRange_1", 25).getInt(25);
-        config.save();
-
-        /*
-        Registering the item
-         */
-        ItemBiomeCompassBase biomeCompassItem1 = new ItemBiomeCompass1(scanRange_1);
-        String itemBiomeCompassName1 = BiomeCompass.MODID + "_biomeCompass1";
-        GameRegistry.registerItem(biomeCompassItem1, itemBiomeCompassName1);
-
-        /*
-         Register the recipe
-          */
-        ItemStack compassStack = new ItemStack(Items.compass);
-        ItemStack mapStack = new ItemStack(Items.map);
-
-        GameRegistry.addRecipe(new ItemStack(biomeCompassItem1), " x ", "xyx", " x ",
-                'x', mapStack, 'y', compassStack);
-
-        /*
-        Registering the item
-         */
-        ItemBiomeCompassBase biomeCompassItem2 = new ItemBiomeCompass2(scanRange_1);
-        String itemBiomeCompassName2 = BiomeCompass.MODID + "_biomeCompass2";
-        GameRegistry.registerItem(biomeCompassItem2, itemBiomeCompassName2);
-
-        /*
-         Register the recipe
-          */
-        ItemStack biomeCompassStack = new ItemStack(biomeCompassItem1);
-        ItemStack enderEyeStack = new ItemStack(Items.ender_eye);
-        ItemStack obsidianStack = new ItemStack(Blocks.obsidian);
-
-        GameRegistry.addRecipe(new ItemStack(biomeCompassItem2), "zxz", "xyx", "zxz",
-                'x', enderEyeStack, 'y', biomeCompassStack, 'z', obsidianStack);
+        this.proxy.preInit(event);
     }
 
 
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-		/*
-		Not currently using
-		 */
-
+        this.proxy.init(event);
     }
 
     @EventHandler
     public void serverLoad(FMLServerStartingEvent event)
     {
-		/*
-		Not currently using
-		 */
+        this.proxy.serverLoad(event);
     }
 
 
