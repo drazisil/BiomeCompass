@@ -19,6 +19,7 @@ package com.drazisil.biomecompass.proxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
 public class BCDedicatedServerProxy extends BCCommonProxy {
     @Override
@@ -34,5 +35,10 @@ public class BCDedicatedServerProxy extends BCCommonProxy {
     @Override
     public void postInit(FMLPostInitializationEvent e) {
         super.postInit(e);
+    }
+
+    @Override
+    public void serverLoad(FMLServerStartingEvent event) {
+        super.serverLoad(event);
     }
 }
