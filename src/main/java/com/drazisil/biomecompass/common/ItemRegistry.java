@@ -32,66 +32,57 @@ public class ItemRegistry {
                 /*
         Registering the item
          */
-        ItemBiomeCompassBase itemBiomeCompass1 = new ItemBiomeCompass1(scanRange);
-        String nameItemBiomeCompass1 = BiomeCompass.MODID + "_biomeCompass1";
-        GameRegistry.registerItem(itemBiomeCompass1, nameItemBiomeCompass1);
+        GameRegistry.registerItem(new ItemBiomeCompass1(scanRange), BiomeCompass.MODID + "_biomeCompass1");
 
         /*
          Register the recipe
           */
-        ItemStack stackCompass = new ItemStack(Items.compass);
-        ItemStack stackMap = new ItemStack(Items.map);
-
-        GameRegistry.addRecipe(new ItemStack(itemBiomeCompass1), " x ", "xyx", " x ",
-                'x', stackMap, 'y', stackCompass);
+        GameRegistry.addRecipe(new ItemStack(new ItemBiomeCompass1(scanRange)),
+                " x ",
+                "xyx",
+                " x ",
+                'x', new ItemStack(Items.map),
+                'y', new ItemStack(Items.compass));
 
         /*
         Registering the item
          */
-        ItemBiomeCompassBase itemBiomeCompass2 = new ItemBiomeCompass2(scanRange);
-        String nameItemBiomeCompass2 = BiomeCompass.MODID + "_biomeCompass2";
-        GameRegistry.registerItem(itemBiomeCompass2, nameItemBiomeCompass2);
+        GameRegistry.registerItem(new ItemBiomeCompass2(scanRange), BiomeCompass.MODID + "_biomeCompass2");
 
         /*
          Register the recipe
           */
-        ItemStack stackBiomeCompass = new ItemStack(itemBiomeCompass1);
-        ItemStack stackEnderEye = new ItemStack(Items.ender_eye);
-        ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
-
-        GameRegistry.addRecipe(new ItemStack(itemBiomeCompass2), "zxz", "xyx", "zxz",
-                'x', stackEnderEye, 'y', stackBiomeCompass, 'z', stackObsidian);
+        ItemStack stackBiomeCompass = new ItemStack(new ItemBiomeCompass1(scanRange));
+        GameRegistry.addRecipe(new ItemStack(new ItemBiomeCompass2(scanRange)),
+                "zxz",
+                "xyx",
+                "zxz",
+                'x', new ItemStack(Items.ender_eye),
+                'y', stackBiomeCompass,
+                'z', new ItemStack(Blocks.obsidian));
 
 
         /* Registering the amalgam pearls */
         /* flora */
-        ItemAmalgamPearlFlora itemAmalgamPearlFlora = new ItemAmalgamPearlFlora();
-        String itemAmalgamPearlFloraName = BiomeCompass.MODID + "_itemAmalgamPearlFlora";
-        GameRegistry.registerItem(itemAmalgamPearlFlora, itemAmalgamPearlFloraName);
+        GameRegistry.registerItem(new ItemAmalgamPearlFlora(), BiomeCompass.MODID + "_itemAmalgamPearlFlora");
 
         /* fauna */
-        ItemAmalgamPearlFauna itemAmalgamPearlFauna = new ItemAmalgamPearlFauna();
-        String itemAmalgamPearlFaunaName = BiomeCompass.MODID + "_itemAmalgamPearlFauna";
-        GameRegistry.registerItem(itemAmalgamPearlFauna, itemAmalgamPearlFaunaName);
+        GameRegistry.registerItem(new ItemAmalgamPearlFauna(), BiomeCompass.MODID + "_itemAmalgamPearlFauna");
 
         /* earthen */
-        ItemAmalgamPearlEarthen itemAmalgamPearlEarthen = new ItemAmalgamPearlEarthen();
-        String itemAmalgamPearlEarthenName = BiomeCompass.MODID + "_itemAmalgamPearlEarthen";
-        GameRegistry.registerItem(itemAmalgamPearlEarthen, itemAmalgamPearlEarthenName);
+        GameRegistry.registerItem(new ItemAmalgamPearlEarthen(), BiomeCompass.MODID + "_itemAmalgamPearlEarthen");
 
 
         /* precious */
-        ItemAmalgamPearlPrecious itemAmalgamPearlPrecious = new ItemAmalgamPearlPrecious();
-        String itemAmalgamPearlPraciousName = BiomeCompass.MODID + "_itemAmalgamPearlPrecious";
-        GameRegistry.registerItem(itemAmalgamPearlPrecious, itemAmalgamPearlPraciousName);
+        GameRegistry.registerItem(new ItemAmalgamPearlPrecious(), BiomeCompass.MODID + "_itemAmalgamPearlPrecious");
 
 
         /*
          Register the recipe
           */
         //ItemStack amalgamPearlFloraStack = new ItemStack(itemAmalgamPearlFlora);
-        ItemStack enderPearlStack = new ItemStack(Items.ender_pearl);
-        ItemStack jungleSapplingStack = new ItemStack(Blocks.sapling, 1, 3);
+        ItemStack stackEnderPearl = new ItemStack(Items.ender_pearl);
+        ItemStack stackJungleSappling = new ItemStack(Blocks.sapling, 1, 3);
         //ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
         //ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
         //ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
@@ -100,8 +91,8 @@ public class ItemRegistry {
         //ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
         //ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
 
-        GameRegistry.addRecipe(new ItemStack(itemAmalgamPearlFlora), "xxx", "xyx", "xxx",
-                'x', enderPearlStack, 'y', jungleSapplingStack);
+        GameRegistry.addRecipe(new ItemStack(new ItemAmalgamPearlFlora()), "xxx", "xyx", "xxx",
+                'x', stackEnderPearl, 'y', stackJungleSappling);
 
 
 

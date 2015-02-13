@@ -29,7 +29,7 @@ public class BiomeCompass
 {
     public static final String MODID = "biomecompass";
     public static final String NAME = "Biome Compass";
-    public static final String VERSION = "1.0.1";
+    public static final String VERSION = "1.5";
 
     @SidedProxy(clientSide = "com.drazisil.biomecompass.proxy.BCClientProxy", serverSide = "com.drazisil.biomecompass.proxy.BCDedicatedServerProxy")
     public static BCCommonProxy proxy;
@@ -38,20 +38,20 @@ public class BiomeCompass
 
     @EventHandler
     public void preInitialization(FMLPreInitializationEvent event){
-        this.proxy.preInit(event);
+        proxy.preInit(event);
     }
 
 
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-        this.proxy.init(event);
+        proxy.init(event);
     }
 
     @EventHandler
     public void serverLoad(FMLServerStartingEvent event)
     {
-        this.proxy.serverLoad(event);
+        proxy.serverLoad(event);
     }
 
 

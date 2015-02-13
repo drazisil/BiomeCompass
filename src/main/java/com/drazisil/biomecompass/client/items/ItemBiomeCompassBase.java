@@ -18,9 +18,6 @@ package com.drazisil.biomecompass.client.items;
 
 import com.drazisil.biomecompass.BiomeCompass;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -41,6 +38,16 @@ public class ItemBiomeCompassBase extends Item {
     // This gets overridden in implementations
     private int scanRadius = 1;
 
+    public boolean canTp() {
+        return hasTP;
+    }
+
+    public void setHasTP(boolean hasTP) {
+        this.hasTP = hasTP;
+    }
+
+    private boolean hasTP = false;
+
     public ItemBiomeCompassBase() {
         /*
         Set name
@@ -54,18 +61,6 @@ public class ItemBiomeCompassBase extends Item {
         Set default of 1 chunk around player
          */
         scanRadius = 1;
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister par1IconRegister)
-    {
-        this.itemIcon = par1IconRegister.registerIcon(this.getIconString());
-
-        // example of different textures assigned to a number
-        this.Textures[0] = par1IconRegister.registerIcon(BiomeCompass.MODID + ":biomeCompass_0");
-        this.Textures[1] = par1IconRegister.registerIcon(BiomeCompass.MODID + ":biomeCompass_90");
-        this.Textures[2] = par1IconRegister.registerIcon(BiomeCompass.MODID + ":biomeCompass_180");
-        this.Textures[3] = par1IconRegister.registerIcon(BiomeCompass.MODID + ":biomeCompass_270");
     }
 
     /**
@@ -141,12 +136,6 @@ public class ItemBiomeCompassBase extends Item {
         return equippedItemStack;
         }
 
-    public Item setTextureName(String p_111206_1_)
-    {
-        this.iconString = p_111206_1_;
-        return this;
-    }
-
     public int getScanRadius() {
         return scanRadius;
     }
@@ -184,7 +173,7 @@ public class ItemBiomeCompassBase extends Item {
                 if (biomeName.toLowerCase().equals(requestedBiomeName)) {
                     logger.info("A " + biomeName + " biome was located at " + i + "," + j);
                     player.addChatMessage(new ChatComponentText("A " + biomeName + " biome was located at " + i + "," + j));
-                    if (hasTP()){
+                    if (canTp()){
                         tpPlayertoBiome(player, i, j);
                     }
                     return;
@@ -196,10 +185,6 @@ public class ItemBiomeCompassBase extends Item {
                 + " biome was not located within the search radius.");
         player.addChatMessage(msg);
 
-    }
-
-    protected boolean hasTP(){
-        return false;
     }
 
 

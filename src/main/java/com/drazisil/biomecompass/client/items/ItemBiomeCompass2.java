@@ -43,6 +43,9 @@ public class ItemBiomeCompass2 extends ItemBiomeCompassBase {
           */
         setScanRadius(scanRange);
 
+        // This compass can tp
+        setHasTP(true);
+
     }
 
     @Override
@@ -63,8 +66,4 @@ public class ItemBiomeCompass2 extends ItemBiomeCompassBase {
         return true;
     }
 
-    @Override
-    protected boolean hasTP() {
-        return true;
-    }
 }
