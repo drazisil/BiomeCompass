@@ -51,5 +51,12 @@ public class ItemAmalgamPearl extends Item {
         return equippedItemStack;
     }
 
+    @Override
+    public boolean hasEffect(ItemStack par1ItemStack, int pass){
+        return true;
+    }
+
+    public void registerRecipes(){ }
+
 }
 

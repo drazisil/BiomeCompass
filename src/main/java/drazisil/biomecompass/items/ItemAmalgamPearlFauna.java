@@ -18,7 +18,6 @@ package drazisil.biomecompass.items;
 
 import drazisil.biomecompass.BiomeCompass;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -41,9 +40,7 @@ public class ItemAmalgamPearlFauna extends  ItemAmalgamPearl{
     }
 
     @Override
-    public boolean hasEffect(ItemStack par1ItemStack, int pass){
-        return true;
+    public void registerRecipes() {
+        super.registerRecipes();
     }
-
-
 }

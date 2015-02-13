@@ -16,11 +16,8 @@
 
 package drazisil.biomecompass.items;
 
-import drazisil.biomecompass.BiomeCompass;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
+import drazisil.biomecompass.BiomeCompass;
 
 public class ItemRegistry {
 
@@ -32,49 +29,36 @@ public class ItemRegistry {
         GameRegistry.registerItem(new ItemBiomeCompass2().setScanRadius(scanRange), new ItemBiomeCompass2().getUnlocalizedName());
 
         /* Registering the amalgam pearls */
-        GameRegistry.registerItem(new ItemAmalgamPearlFlora(), BiomeCompass.MODID + "_itemAmalgamPearlFlora");
-        GameRegistry.registerItem(new ItemAmalgamPearlFauna(), BiomeCompass.MODID + "_itemAmalgamPearlFauna");
-        GameRegistry.registerItem(new ItemAmalgamPearlEarthen(), BiomeCompass.MODID + "_itemAmalgamPearlEarthen");
-        GameRegistry.registerItem(new ItemAmalgamPearlPrecious(), BiomeCompass.MODID + "_itemAmalgamPearlPrecious");
+        GameRegistry.registerItem(new ItemAmalgamPearlFlora(), new ItemAmalgamPearlFlora().getUnlocalizedName());
+        GameRegistry.registerItem(new ItemAmalgamPearlFauna(), new ItemAmalgamPearlFauna().getUnlocalizedName());
+        GameRegistry.registerItem(new ItemAmalgamPearlEarthen(), new ItemAmalgamPearlEarthen().getUnlocalizedName());
+        GameRegistry.registerItem(new ItemAmalgamPearlPrecious(), new ItemAmalgamPearlPrecious().getUnlocalizedName());
     }
 
     public void registerRecipes(){
 
-/*
-        GameRegistry.addRecipe(new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, BiomeCompass.MODID + "_biomeCompass1")),
-                " x ",
-                "xyx",
-                " x ",
-                'x', new ItemStack(Items.map),
-                'y', new ItemStack(Items.compass));
-*/
-
         int scanRange = BiomeCompass.proxy.getScanRange();
 
+        // Register the compasses
         ItemBiomeCompassBase itemBiomeCompass1 = new ItemBiomeCompass1().setScanRadius(scanRange);
         itemBiomeCompass1.registerRecipes();
 
         ItemBiomeCompassBase itemBiomeCompass2 = new ItemBiomeCompass2().setScanRadius(scanRange);
         itemBiomeCompass2.registerRecipes();
 
-        ItemStack stackEnderPearl = new ItemStack(Items.ender_pearl);
-        ItemStack stackJungleSapling = new ItemStack(Blocks.sapling, 1, 3);
-        //ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
-        //ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
-        //ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
-        //ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
-        //ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
-        //ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
-        //ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
 
-        GameRegistry.addRecipe(new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, BiomeCompass.MODID + "_itemAmalgamPearlFlora")),
-                "xxx",
-                "xyx",
-                "xxx",
-                'x', stackJungleSapling,
-                'y', stackEnderPearl);
+        // Register the pearls
+        ItemAmalgamPearlFlora itemAmalgamPearlFlora = new ItemAmalgamPearlFlora();
+        itemAmalgamPearlFlora.registerRecipes();
 
+        ItemAmalgamPearlFauna itemAmalgamPearlFauna = new ItemAmalgamPearlFauna();
+        itemAmalgamPearlFauna.registerRecipes();
 
+        ItemAmalgamPearlEarthen itemAmalgamPearlEarthen = new ItemAmalgamPearlEarthen();
+        itemAmalgamPearlEarthen.registerRecipes();
+
+        ItemAmalgamPearlPrecious itemAmalgamPearlPrecious = new ItemAmalgamPearlPrecious();
+        itemAmalgamPearlPrecious.registerRecipes();
 
     }
 }

@@ -61,4 +61,6 @@ public class ItemBiomeCompass2 extends ItemBiomeCompassBase {
                 'z', new ItemStack(Blocks.obsidian));
 
     }
+
+
 }

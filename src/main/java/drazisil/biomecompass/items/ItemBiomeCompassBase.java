@@ -19,6 +19,7 @@ package drazisil.biomecompass.items;
 import drazisil.biomecompass.BiomeCompass;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -75,7 +76,10 @@ public class ItemBiomeCompassBase extends Item {
                         logger.info(currentEquippedItemName + " is a valid biome");
 
                         // Search for biome matching name
-                        scanForBiomeMatch(player, getScanRadius(), currentEquippedItemName);
+                        if (scanForBiomeMatch(player, getScanRadius(), currentEquippedItemName) && player.getCurrentEquippedItem().getItem() instanceof ItemBiomeCompass2){
+                            // if this is a single-use compass, return vanilla compass
+                            return new ItemStack(Items.compass);
+                        }
                     } else {
                         // Invalid Biome name
                         //logger.info(currentEquippedItemName + " is NOT a valid biome");
@@ -129,7 +133,7 @@ public class ItemBiomeCompassBase extends Item {
      * @param scanRadius int
      * @param requestedBiomeName String
      */
-    protected void scanForBiomeMatch(EntityPlayer player, int scanRadius, String requestedBiomeName)
+    protected boolean scanForBiomeMatch(EntityPlayer player, int scanRadius, String requestedBiomeName)
     {
         int chunkSize = 16;
         World world = player.getEntityWorld();
@@ -147,7 +151,7 @@ public class ItemBiomeCompassBase extends Item {
                     if (canTp()){
                         tpPlayertoBiome(player, i, j);
                     }
-                    return;
+                    return true;
                 }
             }
         }
@@ -155,6 +159,7 @@ public class ItemBiomeCompassBase extends Item {
         ChatComponentText msg =new ChatComponentText("A "+ requestedBiomeName
                 + " biome was not located within the search radius.");
         player.addChatMessage(msg);
+        return false;
 
     }
 
