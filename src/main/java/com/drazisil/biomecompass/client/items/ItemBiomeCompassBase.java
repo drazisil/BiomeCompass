@@ -23,7 +23,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import org.apache.logging.log4j.LogManager;
@@ -32,8 +31,6 @@ import org.apache.logging.log4j.Logger;
 public class ItemBiomeCompassBase extends Item {
 
     protected static final Logger logger = LogManager.getLogger("BiomeCompass");
-
-    protected IIcon[] Textures = new IIcon[4];
 
     // This gets overridden in implementations
     private int scanRadius = 1;
@@ -62,49 +59,38 @@ public class ItemBiomeCompassBase extends Item {
 
         // Only run on server
         if (player.getCurrentEquippedItem() != null && FMLCommonHandler.instance().getEffectiveSide().isServer())
-            {
-                    logger.info("Clicked with Biome Compass");
+        {
+            logger.info("Clicked with Biome Compass");
 
-                // Get player's location
-                int senderX = (int) Math.floor(player.posX);
-                int senderZ = (int) Math.floor(player.posZ);
+            // Check for custom name
+            //logger.info("Clicked with Biome Compass: " + equippedItemStack.getItem().getItemStackDisplayName(equippedItemStack) + " / " + equippedItemStack.hasTagCompound());
+            if (equippedItemStack.hasTagCompound()){
+                // Item has metadata, so it was probably renamed
+                NBTTagCompound currentEquippedItemTags = equippedItemStack.getTagCompound();
+                String currentEquippedItemName = currentEquippedItemTags.getCompoundTag("display").getString("Name").toLowerCase();
 
-                    // Check for custom name
-                    //logger.info("Clicked with Biome Compass: " + equippedItemStack.getItem().getItemStackDisplayName(equippedItemStack) + " / " + equippedItemStack.hasTagCompound());
-                    if (equippedItemStack.hasTagCompound()){
-                        // Item has metadata, so it was probably renamed
-                        NBTTagCompound currentEquippedItemTags = equippedItemStack.getTagCompound();
-                        String currentEquippedItemName = currentEquippedItemTags.getCompoundTag("display").getString("Name").toLowerCase();
+                if (!world.isRemote){
+                    if (isValidBiomeName(currentEquippedItemName)){
+                        // Valid biome name
+                        logger.info(currentEquippedItemName + " is a valid biome");
 
-                        // Get an array of all biomes
-                        BiomeGenBase[] allBiomes = BiomeGenBase.getBiomeGenArray();
-
-                        if (!world.isRemote){
-                            boolean biomeExists = checkIfBiomeExists(allBiomes, currentEquippedItemName);
-                            if (biomeExists){
-                                // Valid biome name
-                                logger.info(currentEquippedItemName + " is a valid biome");
-
-                                // Search for biome matching name
-                                scanForBiomeMatch(player, senderX, senderZ, getScanRadius(), currentEquippedItemName);
-                            } else {
-                                // Invalid Biome name
-                                //logger.info(currentEquippedItemName + " is NOT a valid biome");
-                                String msgBiomeCompassInvalidBiomeName = currentEquippedItemName + " is not a valid biome. Did you spell it correctly?";
-                                player.addChatMessage(new ChatComponentText(msgBiomeCompassInvalidBiomeName));
-                            }
-
-                        }
-
-
+                        // Search for biome matching name
+                        scanForBiomeMatch(player, getScanRadius(), currentEquippedItemName);
                     } else {
-                        // Does not have a custom name, so 'not activated'
-                        String msgBiomeCompassNotActivated = "Please activate your compass by renaming it to the biome you are seeking.";
-                        player.addChatMessage(new ChatComponentText(msgBiomeCompassNotActivated));
+                        // Invalid Biome name
+                        //logger.info(currentEquippedItemName + " is NOT a valid biome");
+                        String msgBiomeCompassInvalidBiomeName = currentEquippedItemName + " is not a valid biome. Did you spell it correctly?";
+                        player.addChatMessage(new ChatComponentText(msgBiomeCompassInvalidBiomeName));
                     }
                 }
-        return equippedItemStack;
+            } else {
+                // Does not have a custom name, so 'not activated'
+                String msgBiomeCompassNotActivated = "Please activate your compass by renaming it to the biome you are seeking.";
+                player.addChatMessage(new ChatComponentText(msgBiomeCompassNotActivated));
+            }
         }
+        return equippedItemStack;
+    }
 
     public int getScanRadius() {
         return scanRadius;
@@ -114,7 +100,15 @@ public class ItemBiomeCompassBase extends Item {
         this.scanRadius = scanRadius;
     }
 
-    private boolean checkIfBiomeExists(BiomeGenBase[] allBiomes, String biomeName ){
+    /**
+     * Looks though a list of all biomes to see of (biomeName) is a valid match
+     * @param biomeName String
+     * @return Boolean
+     */
+    private boolean isValidBiomeName(String biomeName)
+    {
+        // Get an array of all biomes
+        BiomeGenBase[] allBiomes = BiomeGenBase.getBiomeGenArray();
 
         for (BiomeGenBase allBiome : allBiomes) {
             if (allBiome != null && allBiome != BiomeGenBase.hell) {
@@ -128,10 +122,18 @@ public class ItemBiomeCompassBase extends Item {
         return false;
     }
 
-
-    protected void scanForBiomeMatch(EntityPlayer player, int centerX, int centerZ, int scanRadius, String requestedBiomeName){
+    /**
+     * Searches (scanRadius) around the (player)'s X/Z position
+     * @param player EntityPlayer
+     * @param scanRadius int
+     * @param requestedBiomeName String
+     */
+    protected void scanForBiomeMatch(EntityPlayer player, int scanRadius, String requestedBiomeName)
+    {
         int chunkSize = 16;
         World world = player.getEntityWorld();
+        int centerX = (int) player.posX;
+        int centerZ = (int) player.posZ;
 
         logger.info("Searching " + scanRadius + " chunks around " + centerX + "," + centerZ + " for a " + requestedBiomeName);
 
@@ -155,10 +157,11 @@ public class ItemBiomeCompassBase extends Item {
 
     }
 
-
-    protected void tpPlayertoBiome(EntityPlayer player, int x, int z){
+    protected void tpPlayertoBiome(EntityPlayer player, int x, int z)
+    {
         int safeY = player.getEntityWorld().getTopSolidOrLiquidBlock(x, z);
-        if (player.worldObj.getBlock(x, safeY, z).isAir(player.worldObj, x, safeY, z)){
+        if (player.worldObj.getBlock(x, safeY, z).isAir(player.worldObj, x, safeY, z))
+        {
             //logger.info("y=" + safeY + " may be a safe place.");
             ChatComponentText msg =new ChatComponentText("y=" + safeY + " may be a safe place. Teleporting...");
             player.addChatMessage(msg);

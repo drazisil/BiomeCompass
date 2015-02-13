@@ -46,13 +46,9 @@ public class ItemAmalgamPearl extends Item {
             Only run on server
              */
         if (player.getCurrentEquippedItem() != null && FMLCommonHandler.instance().getEffectiveSide().isServer()) {
+            return equippedItemStack;
         }
         return equippedItemStack;
-    }
-
-    public Item setTextureName(String p_111206_1_) {
-        this.iconString = p_111206_1_;
-        return this;
     }
 
 }

@@ -29,60 +29,35 @@ public class ItemRegistry {
 
         int scanRange = BiomeCompass.proxy.getScanRange();
 
-                /*
-        Registering the item
-         */
         GameRegistry.registerItem(new ItemBiomeCompass1(scanRange), BiomeCompass.MODID + "_biomeCompass1");
+        GameRegistry.registerItem(new ItemBiomeCompass2(scanRange), BiomeCompass.MODID + "_biomeCompass2");
 
-        /*
-         Register the recipe
-          */
-        GameRegistry.addRecipe(new ItemStack(new ItemBiomeCompass1(scanRange)),
+        /* Registering the amalgam pearls */
+        GameRegistry.registerItem(new ItemAmalgamPearlFlora(), BiomeCompass.MODID + "_itemAmalgamPearlFlora");
+        GameRegistry.registerItem(new ItemAmalgamPearlFauna(), BiomeCompass.MODID + "_itemAmalgamPearlFauna");
+        GameRegistry.registerItem(new ItemAmalgamPearlEarthen(), BiomeCompass.MODID + "_itemAmalgamPearlEarthen");
+        GameRegistry.registerItem(new ItemAmalgamPearlPrecious(), BiomeCompass.MODID + "_itemAmalgamPearlPrecious");
+    }
+
+    public void registerRecipes(){
+
+        GameRegistry.addRecipe(new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, BiomeCompass.MODID + "_biomeCompass1")),
                 " x ",
                 "xyx",
                 " x ",
                 'x', new ItemStack(Items.map),
                 'y', new ItemStack(Items.compass));
 
-        /*
-        Registering the item
-         */
-        GameRegistry.registerItem(new ItemBiomeCompass2(scanRange), BiomeCompass.MODID + "_biomeCompass2");
-
-        /*
-         Register the recipe
-          */
-        ItemStack stackBiomeCompass = new ItemStack(new ItemBiomeCompass1(scanRange));
-        GameRegistry.addRecipe(new ItemStack(new ItemBiomeCompass2(scanRange)),
+        GameRegistry.addRecipe(new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, BiomeCompass.MODID + "_biomeCompass2")),
                 "zxz",
                 "xyx",
                 "zxz",
                 'x', new ItemStack(Items.ender_eye),
-                'y', stackBiomeCompass,
+                'y', new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, BiomeCompass.MODID + "_biomeCompass1")),
                 'z', new ItemStack(Blocks.obsidian));
 
-
-        /* Registering the amalgam pearls */
-        /* flora */
-        GameRegistry.registerItem(new ItemAmalgamPearlFlora(), BiomeCompass.MODID + "_itemAmalgamPearlFlora");
-
-        /* fauna */
-        GameRegistry.registerItem(new ItemAmalgamPearlFauna(), BiomeCompass.MODID + "_itemAmalgamPearlFauna");
-
-        /* earthen */
-        GameRegistry.registerItem(new ItemAmalgamPearlEarthen(), BiomeCompass.MODID + "_itemAmalgamPearlEarthen");
-
-
-        /* precious */
-        GameRegistry.registerItem(new ItemAmalgamPearlPrecious(), BiomeCompass.MODID + "_itemAmalgamPearlPrecious");
-
-
-        /*
-         Register the recipe
-          */
-        //ItemStack amalgamPearlFloraStack = new ItemStack(itemAmalgamPearlFlora);
         ItemStack stackEnderPearl = new ItemStack(Items.ender_pearl);
-        ItemStack stackJungleSappling = new ItemStack(Blocks.sapling, 1, 3);
+        ItemStack stackJungleSapling = new ItemStack(Blocks.sapling, 1, 3);
         //ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
         //ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
         //ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
@@ -91,8 +66,12 @@ public class ItemRegistry {
         //ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
         //ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
 
-        GameRegistry.addRecipe(new ItemStack(new ItemAmalgamPearlFlora()), "xxx", "xyx", "xxx",
-                'x', stackEnderPearl, 'y', stackJungleSappling);
+        GameRegistry.addRecipe(new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, BiomeCompass.MODID + "_itemAmalgamPearlFlora")),
+                "xxx",
+                "xyx",
+                "xxx",
+                'x', stackJungleSapling,
+                'y', stackEnderPearl);
 
 
 

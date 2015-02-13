@@ -16,7 +16,6 @@
 
 package com.drazisil.biomecompass.proxy;
 
-
 import com.drazisil.biomecompass.common.ItemRegistry;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -30,53 +29,34 @@ public class BCCommonProxy {
         return false;
     }
 
-    public int getScanRange() {
-        return scanRange;
-    }
+    public int getScanRange() { return scanRange; }
 
-    public void setScanRange(int scanRange) {
-        this.scanRange = scanRange;
-    }
+    public void setScanRange(int scanRange) { this.scanRange = scanRange; }
 
     private int scanRange;
 
-
-
     public void preInit(FMLPreInitializationEvent event) {
-                /*
-        Not currently using events at the global level, but leaving the code for reference
-         */
+        // Not currently using events at the global level, but leaving the code for reference
         //FMLCommonHandler.instance().bus().register(events);
         //MinecraftForge.EVENT_BUS.register(events);
 
-        /*
-        Get the configuration
-         */
+        // Get the configuration
         Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 
         config.load();
 
-         setScanRange(config.get("general", "scanRange_1", 25).getInt(25));
+        setScanRange(config.get("general", "scanRange_1", 25).getInt(25));
         config.save();
 
         ItemRegistry itemRegistry = new ItemRegistry();
         itemRegistry.registerItems();
+        itemRegistry.registerRecipes();
     }
 
-    public void init(FMLInitializationEvent event) {
+    public void init(FMLInitializationEvent event) { }
 
-    }
+    public void postInit(FMLPostInitializationEvent event) { }
 
-    public void postInit(FMLPostInitializationEvent event) {
-
-    }
-
-    public void serverLoad(FMLServerStartingEvent event)
-    {
-
-    }
-
-
-
+    public void serverLoad(FMLServerStartingEvent event) { }
 
 }

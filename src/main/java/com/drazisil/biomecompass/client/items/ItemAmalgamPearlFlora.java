@@ -28,16 +28,14 @@ public class ItemAmalgamPearlFlora extends  ItemAmalgamPearl{
 
     public ItemAmalgamPearlFlora() {
 
-    /* Set name */
-    setUnlocalizedName(BiomeCompass.MODID + "_amalgampearl_flora");
+        /* Set name */
+        setUnlocalizedName(BiomeCompass.MODID + "_amalgampearl_flora");
 
-    /* Set texture */
-    setTextureName(BiomeCompass.MODID + ":amalgampearl_flora");
+        /* Set texture */
+        setTextureName(BiomeCompass.MODID + ":amalgampearl_flora");
 
-     /* Make available in creative mode */
-     setCreativeTab(CreativeTabs.tabMisc);
-
-
+         /* Make available in creative mode */
+         setCreativeTab(CreativeTabs.tabMisc);
     }
 
     @Override

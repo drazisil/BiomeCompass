@@ -17,9 +17,6 @@
 package com.drazisil.biomecompass.client.items;
 
 import com.drazisil.biomecompass.BiomeCompass;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 
 public class ItemBiomeCompass1 extends ItemBiomeCompassBase {
@@ -41,19 +38,6 @@ public class ItemBiomeCompass1 extends ItemBiomeCompassBase {
          Override default of 1
           */
         setScanRadius(scanRange);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister par1IconRegister)
-    {
-        this.itemIcon = par1IconRegister.registerIcon(this.getIconString());
-
-        // example of different textures assigned to a number
-        this.Textures[0] = par1IconRegister.registerIcon(BiomeCompass.MODID + ":biomeCompass_0");
-        this.Textures[1] = par1IconRegister.registerIcon(BiomeCompass.MODID + ":biomeCompass_90");
-        this.Textures[2] = par1IconRegister.registerIcon(BiomeCompass.MODID + ":biomeCompass_180");
-        this.Textures[3] = par1IconRegister.registerIcon(BiomeCompass.MODID + ":biomeCompass_270");
     }
 
 }
