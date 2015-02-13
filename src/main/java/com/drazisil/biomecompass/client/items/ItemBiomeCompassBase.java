@@ -56,7 +56,7 @@ public class ItemBiomeCompassBase extends Item {
         /*
         Set texture
          */
-        setTextureName(BiomeCompass.MODID + ":biomeCompass_0");
+        setTextureName(BiomeCompass.MODID + ":biomeCompassBase");
         /*
         Set default of 1 chunk around player
          */
