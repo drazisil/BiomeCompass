@@ -8,3 +8,7 @@ item.biomecompass_amalgampearl_flora.name=Flora Amalgam
 item.biomecompass_amalgampearl_fauna.name=Fauna Amalgam
 item.biomecompass_amalgampearl_earthen.name=Earthen Amalgam
 item.biomecompass_amalgampearl_precious.name=Precious Amalgam
+
+strInvalidBiomeName=%s is not a valid biome. Did you spell it correctly?
+strBiomeCompassNotActivated=Please activate your compass by renaming it to the biome you are seeking.
+strBiomeLocated=A %s biome was located at %d, %d

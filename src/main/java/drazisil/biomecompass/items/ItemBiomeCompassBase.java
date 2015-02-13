@@ -16,14 +16,16 @@
 
 package drazisil.biomecompass.items;
 
-import drazisil.biomecompass.BiomeCompass;
 import cpw.mods.fml.common.FMLCommonHandler;
+import drazisil.biomecompass.BiomeCompass;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import org.apache.logging.log4j.LogManager;
@@ -64,7 +66,6 @@ public class ItemBiomeCompassBase extends Item {
             logger.info("Clicked with Biome Compass");
 
             // Check for custom name
-            //logger.info("Clicked with Biome Compass: " + equippedItemStack.getItem().getItemStackDisplayName(equippedItemStack) + " / " + equippedItemStack.hasTagCompound());
             if (equippedItemStack.hasTagCompound()){
                 // Item has metadata, so it was probably renamed
                 NBTTagCompound currentEquippedItemTags = equippedItemStack.getTagCompound();
@@ -76,21 +77,21 @@ public class ItemBiomeCompassBase extends Item {
                         logger.info(currentEquippedItemName + " is a valid biome");
 
                         // Search for biome matching name
-                        if (scanForBiomeMatch(player, getScanRadius(), currentEquippedItemName) && player.getCurrentEquippedItem().getItem() instanceof ItemBiomeCompass2){
+                        if ((scanForBiomeMatch(player, getScanRadius(), currentEquippedItemName))
+                                && (equippedItemStack.getItem() instanceof ItemBiomeCompass2)){
                             // if this is a single-use compass, return vanilla compass
                             return new ItemStack(Items.compass);
                         }
                     } else {
                         // Invalid Biome name
-                        //logger.info(currentEquippedItemName + " is NOT a valid biome");
-                        String msgBiomeCompassInvalidBiomeName = currentEquippedItemName + " is not a valid biome. Did you spell it correctly?";
+                        String msgBiomeCompassInvalidBiomeName = I18n.format("strInvalidBiomeName", currentEquippedItemName) ;
+
                         player.addChatMessage(new ChatComponentText(msgBiomeCompassInvalidBiomeName));
                     }
                 }
             } else {
                 // Does not have a custom name, so 'not activated'
-                String msgBiomeCompassNotActivated = "Please activate your compass by renaming it to the biome you are seeking.";
-                player.addChatMessage(new ChatComponentText(msgBiomeCompassNotActivated));
+                player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("strBiomeCompassNotActivated")));
             }
         }
         return equippedItemStack;
@@ -147,7 +148,7 @@ public class ItemBiomeCompassBase extends Item {
                 String biomeName = world.getBiomeGenForCoords(i, j).biomeName;
                 if (biomeName.toLowerCase().equals(requestedBiomeName)) {
                     logger.info("A " + biomeName + " biome was located at " + i + "," + j);
-                    player.addChatMessage(new ChatComponentText("A " + biomeName + " biome was located at " + i + "," + j));
+                    player.addChatMessage(new ChatComponentText(I18n.format("strBiomeLocated", biomeName, i, j)));
                     if (canTp()){
                         tpPlayertoBiome(player, i, j);
                     }
