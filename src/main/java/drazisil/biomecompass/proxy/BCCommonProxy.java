@@ -14,9 +14,9 @@
  *    limitations under the License.
  */
 
-package com.drazisil.biomecompass.proxy;
+package drazisil.biomecompass.proxy;
 
-import com.drazisil.biomecompass.common.ItemRegistry;
+import drazisil.biomecompass.items.ItemRegistry;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;

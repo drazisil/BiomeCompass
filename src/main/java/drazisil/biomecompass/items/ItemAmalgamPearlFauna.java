@@ -14,34 +14,29 @@
  *    limitations under the License.
  */
 
-package com.drazisil.biomecompass.client.items;
+package drazisil.biomecompass.items;
 
-import com.drazisil.biomecompass.BiomeCompass;
+import drazisil.biomecompass.BiomeCompass;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-public class ItemBiomeCompass2 extends ItemBiomeCompassBase {
+public class ItemAmalgamPearlFauna extends  ItemAmalgamPearl{
 
-    public ItemBiomeCompass2(int scanRange) {
-        super();
+    protected static final Logger logger = LogManager.getLogger("BiomeCompass");
 
-        /*
-         Set name
-          */
-        setUnlocalizedName(BiomeCompass.MODID + "_biomeCompass_2");
+    public ItemAmalgamPearlFauna() {
 
-        /*
-         Make available in creative mode
-          */
-        setCreativeTab(CreativeTabs.tabMisc);
+    /* Set name */
+    setUnlocalizedName(BiomeCompass.MODID + "_amalgampearl_fauna");
 
-        /*
-         Override default of 1
-          */
-        setScanRadius(scanRange);
+    /* Set texture */
+    setTextureName(BiomeCompass.MODID + ":amalgampearl_fauna");
 
-        // This compass can tp
-        setHasTP(true);
+     /* Make available in creative mode */
+     setCreativeTab(CreativeTabs.tabMisc);
+
 
     }
 
@@ -49,5 +44,6 @@ public class ItemBiomeCompass2 extends ItemBiomeCompassBase {
     public boolean hasEffect(ItemStack par1ItemStack, int pass){
         return true;
     }
+
 
 }

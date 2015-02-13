@@ -14,14 +14,17 @@
  *    limitations under the License.
  */
 
-package com.drazisil.biomecompass.client.items;
+package drazisil.biomecompass.items;
 
-import com.drazisil.biomecompass.BiomeCompass;
+import cpw.mods.fml.common.registry.GameRegistry;
+import drazisil.biomecompass.BiomeCompass;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 
 public class ItemBiomeCompass1 extends ItemBiomeCompassBase {
 
-    public ItemBiomeCompass1(int scanRange) {
+    public ItemBiomeCompass1() {
         super();
 
         /*
@@ -34,10 +37,17 @@ public class ItemBiomeCompass1 extends ItemBiomeCompassBase {
           */
         setCreativeTab(CreativeTabs.tabMisc);
 
-        /*
-         Override default of 1
-          */
-        setScanRadius(scanRange);
     }
 
+    @Override
+    public void registerRecipes() {
+        super.registerRecipes();
+        GameRegistry.addRecipe(new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, getUnlocalizedName())),
+                " x ",
+                "xyx",
+                " x ",
+                'x', new ItemStack(Items.map),
+                'y', new ItemStack(Items.compass));
+
+    }
 }

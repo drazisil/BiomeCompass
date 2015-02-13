@@ -14,9 +14,9 @@
  *    limitations under the License.
  */
 
-package com.drazisil.biomecompass.client.items;
+package drazisil.biomecompass.items;
 
-import com.drazisil.biomecompass.BiomeCompass;
+import drazisil.biomecompass.BiomeCompass;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import org.apache.logging.log4j.LogManager;

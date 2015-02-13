@@ -14,10 +14,9 @@
  *    limitations under the License.
  */
 
-package com.drazisil.biomecompass.common;
+package drazisil.biomecompass.items;
 
-import com.drazisil.biomecompass.BiomeCompass;
-import com.drazisil.biomecompass.client.items.*;
+import drazisil.biomecompass.BiomeCompass;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -29,8 +28,8 @@ public class ItemRegistry {
 
         int scanRange = BiomeCompass.proxy.getScanRange();
 
-        GameRegistry.registerItem(new ItemBiomeCompass1(scanRange), BiomeCompass.MODID + "_biomeCompass1");
-        GameRegistry.registerItem(new ItemBiomeCompass2(scanRange), BiomeCompass.MODID + "_biomeCompass2");
+        GameRegistry.registerItem(new ItemBiomeCompass1().setScanRadius(scanRange), new ItemBiomeCompass1().getUnlocalizedName());
+        GameRegistry.registerItem(new ItemBiomeCompass2().setScanRadius(scanRange), new ItemBiomeCompass2().getUnlocalizedName());
 
         /* Registering the amalgam pearls */
         GameRegistry.registerItem(new ItemAmalgamPearlFlora(), BiomeCompass.MODID + "_itemAmalgamPearlFlora");
@@ -41,20 +40,22 @@ public class ItemRegistry {
 
     public void registerRecipes(){
 
+/*
         GameRegistry.addRecipe(new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, BiomeCompass.MODID + "_biomeCompass1")),
                 " x ",
                 "xyx",
                 " x ",
                 'x', new ItemStack(Items.map),
                 'y', new ItemStack(Items.compass));
+*/
 
-        GameRegistry.addRecipe(new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, BiomeCompass.MODID + "_biomeCompass2")),
-                "zxz",
-                "xyx",
-                "zxz",
-                'x', new ItemStack(Items.ender_eye),
-                'y', new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, BiomeCompass.MODID + "_biomeCompass1")),
-                'z', new ItemStack(Blocks.obsidian));
+        int scanRange = BiomeCompass.proxy.getScanRange();
+
+        ItemBiomeCompassBase itemBiomeCompass1 = new ItemBiomeCompass1().setScanRadius(scanRange);
+        itemBiomeCompass1.registerRecipes();
+
+        ItemBiomeCompassBase itemBiomeCompass2 = new ItemBiomeCompass2().setScanRadius(scanRange);
+        itemBiomeCompass2.registerRecipes();
 
         ItemStack stackEnderPearl = new ItemStack(Items.ender_pearl);
         ItemStack stackJungleSapling = new ItemStack(Blocks.sapling, 1, 3);

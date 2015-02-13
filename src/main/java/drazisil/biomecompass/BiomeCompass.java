@@ -14,9 +14,9 @@
  *    limitations under the License.
  */
 
-package com.drazisil.biomecompass;
+package drazisil.biomecompass;
 
-import com.drazisil.biomecompass.proxy.BCCommonProxy;
+import drazisil.biomecompass.proxy.BCCommonProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
@@ -31,7 +31,7 @@ public class BiomeCompass
     public static final String NAME = "Biome Compass";
     public static final String VERSION = "1.5";
 
-    @SidedProxy(clientSide = "com.drazisil.biomecompass.proxy.BCClientProxy", serverSide = "com.drazisil.biomecompass.proxy.BCDedicatedServerProxy")
+    @SidedProxy(clientSide = "drazisil.biomecompass.proxy.BCClientProxy", serverSide = "drazisil.biomecompass.proxy.BCDedicatedServerProxy")
     public static BCCommonProxy proxy;
 
     //BiomeCompassEventHandler events = new BiomeCompassEventHandler();

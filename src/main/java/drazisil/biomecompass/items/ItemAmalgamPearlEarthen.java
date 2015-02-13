@@ -14,25 +14,25 @@
  *    limitations under the License.
  */
 
-package com.drazisil.biomecompass.client.items;
+package drazisil.biomecompass.items;
 
-import com.drazisil.biomecompass.BiomeCompass;
+import drazisil.biomecompass.BiomeCompass;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class ItemAmalgamPearlFauna extends  ItemAmalgamPearl{
+public class ItemAmalgamPearlEarthen extends  ItemAmalgamPearl{
 
     protected static final Logger logger = LogManager.getLogger("BiomeCompass");
 
-    public ItemAmalgamPearlFauna() {
+    public ItemAmalgamPearlEarthen() {
 
     /* Set name */
-    setUnlocalizedName(BiomeCompass.MODID + "_amalgampearl_fauna");
+    setUnlocalizedName(BiomeCompass.MODID + "_amalgampearl_earthen");
 
     /* Set texture */
-    setTextureName(BiomeCompass.MODID + ":amalgampearl_fauna");
+    setTextureName(BiomeCompass.MODID + ":amalgampearl_earthen");
 
      /* Make available in creative mode */
      setCreativeTab(CreativeTabs.tabMisc);

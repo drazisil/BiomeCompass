@@ -14,9 +14,9 @@
  *    limitations under the License.
  */
 
-package com.drazisil.biomecompass.client.items;
+package drazisil.biomecompass.items;
 
-import com.drazisil.biomecompass.BiomeCompass;
+import drazisil.biomecompass.BiomeCompass;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -96,8 +96,9 @@ public class ItemBiomeCompassBase extends Item {
         return scanRadius;
     }
 
-    public void setScanRadius(int scanRadius) {
+    public ItemBiomeCompassBase setScanRadius(int scanRadius) {
         this.scanRadius = scanRadius;
+        return this;
     }
 
     /**
@@ -185,5 +186,7 @@ public class ItemBiomeCompassBase extends Item {
     public void setHasTP(boolean hasTP) {
         this.hasTP = hasTP;
     }
+
+    public void registerRecipes(){ }
 
 }

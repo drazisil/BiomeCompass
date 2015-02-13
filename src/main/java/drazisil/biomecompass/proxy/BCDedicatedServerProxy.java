@@ -14,14 +14,14 @@
  *    limitations under the License.
  */
 
-package com.drazisil.biomecompass.proxy;
+package drazisil.biomecompass.proxy;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
-public class BCClientProxy extends BCCommonProxy {
+public class BCDedicatedServerProxy extends BCCommonProxy {
     @Override
     public void preInit(FMLPreInitializationEvent e) {
         super.preInit(e);
