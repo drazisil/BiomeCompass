@@ -38,28 +38,14 @@ public class ItemBiomeCompassBase extends Item {
     // This gets overridden in implementations
     private int scanRadius = 1;
 
-    public boolean canTp() {
-        return hasTP;
-    }
-
-    public void setHasTP(boolean hasTP) {
-        this.hasTP = hasTP;
-    }
-
     private boolean hasTP = false;
 
     public ItemBiomeCompassBase() {
-        /*
-        Set name
-         */
+        // Set name
         setUnlocalizedName(BiomeCompass.MODID + "_biomeCompass");
-        /*
-        Set texture
-         */
+        // Set texture
         setTextureName(BiomeCompass.MODID + ":biomeCompassBase");
-        /*
-        Set default of 1 chunk around player
-         */
+        // Set default of 1 chunk around player
         scanRadius = 1;
     }
 
@@ -74,51 +60,35 @@ public class ItemBiomeCompassBase extends Item {
             return equippedItemStack;
         }
 
-        /*
-            Only run on server
-             */
+        // Only run on server
         if (player.getCurrentEquippedItem() != null && FMLCommonHandler.instance().getEffectiveSide().isServer())
             {
                     logger.info("Clicked with Biome Compass");
 
-                    /*
-                    Get player's location
-                     */
+                // Get player's location
                 int senderX = (int) Math.floor(player.posX);
                 int senderZ = (int) Math.floor(player.posZ);
 
-                    /*
-                     Check for custom name
-                      */
+                    // Check for custom name
                     //logger.info("Clicked with Biome Compass: " + equippedItemStack.getItem().getItemStackDisplayName(equippedItemStack) + " / " + equippedItemStack.hasTagCompound());
                     if (equippedItemStack.hasTagCompound()){
-                        /*
-                        Item has metadata, so it was probably renamed
-                         */
+                        // Item has metadata, so it was probably renamed
                         NBTTagCompound currentEquippedItemTags = equippedItemStack.getTagCompound();
                         String currentEquippedItemName = currentEquippedItemTags.getCompoundTag("display").getString("Name").toLowerCase();
 
-                        /*
-                        Get an array of all biomes
-                         */
+                        // Get an array of all biomes
                         BiomeGenBase[] allBiomes = BiomeGenBase.getBiomeGenArray();
 
                         if (!world.isRemote){
                             boolean biomeExists = checkIfBiomeExists(allBiomes, currentEquippedItemName);
                             if (biomeExists){
-                                /*
-                                Valid biome name
-                                 */
+                                // Valid biome name
                                 logger.info(currentEquippedItemName + " is a valid biome");
 
-                                /*
-                                Search for biome matching name
-                                 */
+                                // Search for biome matching name
                                 scanForBiomeMatch(player, senderX, senderZ, getScanRadius(), currentEquippedItemName);
                             } else {
-                                /*
-                                Invalid Biome name
-                                 */
+                                // Invalid Biome name
                                 //logger.info(currentEquippedItemName + " is NOT a valid biome");
                                 String msgBiomeCompassInvalidBiomeName = currentEquippedItemName + " is not a valid biome. Did you spell it correctly?";
                                 player.addChatMessage(new ChatComponentText(msgBiomeCompassInvalidBiomeName));
@@ -155,9 +125,7 @@ public class ItemBiomeCompassBase extends Item {
             }
 
         }
-
         return false;
-
     }
 
 
@@ -205,6 +173,14 @@ public class ItemBiomeCompassBase extends Item {
 
         }
 
+    }
+
+    public boolean canTp() {
+        return hasTP;
+    }
+
+    public void setHasTP(boolean hasTP) {
+        this.hasTP = hasTP;
     }
 
 }
