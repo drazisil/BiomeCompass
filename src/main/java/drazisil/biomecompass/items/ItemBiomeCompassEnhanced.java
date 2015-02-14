@@ -19,7 +19,6 @@ package drazisil.biomecompass.items;
 import cpw.mods.fml.common.registry.GameRegistry;
 import drazisil.biomecompass.BiomeCompass;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
@@ -53,12 +52,11 @@ public class ItemBiomeCompassEnhanced extends ItemBiomeCompassBase {
         super.registerRecipes();
         ItemBiomeCompassBasic itemBiomeCompass1 = new ItemBiomeCompassBasic();
         GameRegistry.addRecipe(new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, getUnlocalizedName())),
-                "zxz",
+                " x ",
                 "xyx",
-                "zxz",
-                'x', new ItemStack(Items.ender_eye),
-                'y', new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, itemBiomeCompass1.getUnlocalizedName())),
-                'z', new ItemStack(Blocks.obsidian));
+                " x ",
+                'x', new ItemStack(Items.ender_pearl),
+                'y', new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, itemBiomeCompass1.getUnlocalizedName())));
 
     }
 

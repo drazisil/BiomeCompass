@@ -19,11 +19,9 @@ package drazisil.biomecompass.items;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import drazisil.biomecompass.BiomeCompass;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -66,10 +64,9 @@ public class ItemBiomeCompassBase extends Item {
             logger.info("Clicked with Biome Compass");
 
             // Check for custom name
-            if (equippedItemStack.hasTagCompound()){
+            if (!equippedItemStack.getDisplayName().equals(equippedItemStack.getItem().getItemStackDisplayName(equippedItemStack))){
                 // Item has metadata, so it was probably renamed
-                NBTTagCompound currentEquippedItemTags = equippedItemStack.getTagCompound();
-                String currentEquippedItemName = currentEquippedItemTags.getCompoundTag("display").getString("Name").toLowerCase();
+                String currentEquippedItemName = equippedItemStack.getDisplayName();
 
                 if (!world.isRemote){
                     if (isValidBiomeName(currentEquippedItemName)){
@@ -85,7 +82,7 @@ public class ItemBiomeCompassBase extends Item {
                         }
                     } else {
                         // Invalid Biome name
-                        String msgBiomeCompassInvalidBiomeName = I18n.format("strInvalidBiomeName", currentEquippedItemName) ;
+                        String msgBiomeCompassInvalidBiomeName = StatCollector.translateToLocalFormatted("strInvalidBiomeName", currentEquippedItemName) ;
 
                         player.addChatMessage(new ChatComponentText(msgBiomeCompassInvalidBiomeName));
                     }
@@ -149,7 +146,7 @@ public class ItemBiomeCompassBase extends Item {
                 String biomeName = world.getBiomeGenForCoords(i, j).biomeName;
                 if (biomeName.toLowerCase().equals(requestedBiomeName)) {
                     //logger.info("A " + biomeName + " biome was located at " + i + "," + j);
-                    player.addChatMessage(new ChatComponentText(I18n.format("strBiomeLocated", biomeName, i, j)));
+                    player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("strBiomeLocated", biomeName, i, j)));
                     if (canTp()){
                         tpPlayertoBiome(player, i, j);
                     }
