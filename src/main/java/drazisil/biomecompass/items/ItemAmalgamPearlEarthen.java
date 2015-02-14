@@ -16,8 +16,12 @@
 
 package drazisil.biomecompass.items;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import drazisil.biomecompass.BiomeCompass;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,5 +46,29 @@ public class ItemAmalgamPearlEarthen extends  ItemAmalgamPearl{
     @Override
     public void registerRecipes() {
         super.registerRecipes();
+        ItemStack stackEnderPearl = new ItemStack(Items.ender_pearl);
+        ItemStack stackDirt = new ItemStack(Blocks.dirt);
+        ItemStack stackGravel = new ItemStack(Blocks.gravel);
+        ItemStack stackClay = new ItemStack(Blocks.clay);
+        ItemStack stackGrass = new ItemStack(Blocks.grass);
+        ItemStack stackStone = new ItemStack(Blocks.stone);
+        ItemStack stackSnow = new ItemStack(Blocks.snow);
+        ItemStack stackSand = new ItemStack(Blocks.sand);
+        ItemStack stackSandStone = new ItemStack(Blocks.sandstone);
+
+        GameRegistry.addRecipe(new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, getUnlocalizedName())),
+                "abc",
+                "def",
+                "ghi",
+                'a', stackDirt,
+                'b', stackGravel,
+                'c', stackClay,
+                'd', stackGrass,
+                'e', stackEnderPearl,
+                'f', stackStone,
+                'g', stackSnow,
+                'h', stackSand,
+                'i', stackSandStone);
+
     }
 }

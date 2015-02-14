@@ -16,8 +16,12 @@
 
 package drazisil.biomecompass.items;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import drazisil.biomecompass.BiomeCompass;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,5 +46,30 @@ public class ItemAmalgamPearlFauna extends  ItemAmalgamPearl{
     @Override
     public void registerRecipes() {
         super.registerRecipes();
+        ItemStack stackEnderPearl = new ItemStack(Items.ender_pearl);
+        ItemStack stackLeather = new ItemStack(Items.leather);
+        ItemStack stackFish = new ItemStack(Items.fish);
+        ItemStack stackPorkChop = new ItemStack(Items.porkchop);
+        ItemStack stackWool = new ItemStack(Blocks.wool);
+        ItemStack stackBone = new ItemStack(Items.bone);
+        ItemStack stackEgg = new ItemStack(Items.egg);
+        ItemStack stackDye = new ItemStack(Items.dye);
+        ItemStack stackSaddle = new ItemStack(Items.saddle);
+
+        GameRegistry.addRecipe(new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, getUnlocalizedName())),
+                "abc",
+                "def",
+                "ghi",
+                'a', stackLeather,
+                'b', stackFish,
+                'c', stackPorkChop,
+                'd', stackWool,
+                'e', stackEnderPearl,
+                'f', stackBone,
+                'g', stackEgg,
+                'h', stackDye,
+                'i', stackSaddle);
+
+
     }
 }

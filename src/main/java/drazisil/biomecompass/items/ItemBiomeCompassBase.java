@@ -17,10 +17,10 @@
 package drazisil.biomecompass.items;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.registry.GameRegistry;
 import drazisil.biomecompass.BiomeCompass;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -80,7 +80,8 @@ public class ItemBiomeCompassBase extends Item {
                         if ((scanForBiomeMatch(player, getScanRadius(), currentEquippedItemName))
                                 && (equippedItemStack.getItem() instanceof ItemBiomeCompass2)){
                             // if this is a single-use compass, return vanilla compass
-                            return new ItemStack(Items.compass);
+                            ItemBiomeCompass1 itemBiomeCompass1 = new ItemBiomeCompass1();
+                            return new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, itemBiomeCompass1.getUnlocalizedName())).setStackDisplayName(currentEquippedItemName);
                         }
                     } else {
                         // Invalid Biome name
@@ -141,13 +142,13 @@ public class ItemBiomeCompassBase extends Item {
         int centerX = (int) player.posX;
         int centerZ = (int) player.posZ;
 
-        logger.info("Searching " + scanRadius + " chunks around " + centerX + "," + centerZ + " for a " + requestedBiomeName);
+        //logger.info("Searching " + scanRadius + " chunks around " + centerX + "," + centerZ + " for a " + requestedBiomeName);
 
         for(int i=(centerX - (scanRadius * chunkSize)); i<(centerZ + (scanRadius * chunkSize)); i += chunkSize){
             for(int j=(centerZ - (scanRadius * chunkSize)); j<(centerZ + (scanRadius * chunkSize)); j += chunkSize){
                 String biomeName = world.getBiomeGenForCoords(i, j).biomeName;
                 if (biomeName.toLowerCase().equals(requestedBiomeName)) {
-                    logger.info("A " + biomeName + " biome was located at " + i + "," + j);
+                    //logger.info("A " + biomeName + " biome was located at " + i + "," + j);
                     player.addChatMessage(new ChatComponentText(I18n.format("strBiomeLocated", biomeName, i, j)));
                     if (canTp()){
                         tpPlayertoBiome(player, i, j);

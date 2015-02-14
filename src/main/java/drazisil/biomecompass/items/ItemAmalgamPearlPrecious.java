@@ -16,8 +16,12 @@
 
 package drazisil.biomecompass.items;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import drazisil.biomecompass.BiomeCompass;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -43,5 +47,29 @@ public class ItemAmalgamPearlPrecious extends  ItemAmalgamPearl{
     @Override
     public void registerRecipes() {
         super.registerRecipes();
+        ItemStack stackEnderPearl = new ItemStack(Items.ender_pearl);
+        ItemStack stackDiamond = new ItemStack(Items.diamond);
+        ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
+        ItemStack stackGoldIngot = new ItemStack(Items.gold_ingot);
+        ItemStack stackRedstoneBlock = new ItemStack(Blocks.redstone_block);
+        ItemStack stackLapisBlock = new ItemStack(Blocks.lapis_block);
+        ItemStack stackIronIngot = new ItemStack(Items.iron_ingot);
+        ItemStack stackCoalBlock = new ItemStack(Blocks.coal_block);
+        ItemStack stackEmerald = new ItemStack(Items.emerald);
+
+        GameRegistry.addRecipe(new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, getUnlocalizedName())),
+                "abc",
+                "def",
+                "ghi",
+                'a', stackDiamond,
+                'b', stackObsidian,
+                'c', stackGoldIngot,
+                'd', stackRedstoneBlock,
+                'e', stackEnderPearl,
+                'f', stackLapisBlock,
+                'g', stackIronIngot,
+                'h', stackCoalBlock,
+                'i', stackEmerald);
+
     }
 }

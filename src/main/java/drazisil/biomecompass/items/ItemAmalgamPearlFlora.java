@@ -46,21 +46,26 @@ public class ItemAmalgamPearlFlora extends  ItemAmalgamPearl{
         super.registerRecipes();
         ItemStack stackEnderPearl = new ItemStack(Items.ender_pearl);
         ItemStack stackJungleSapling = new ItemStack(Blocks.sapling, 1, 3);
-        //ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
-        //ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
-        //ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
-        //ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
-        //ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
-        //ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
-        //ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
+        ItemStack stackSunflower = new ItemStack(Blocks.double_plant);
+        ItemStack stackAcaciaSapling = new ItemStack(Blocks.sapling, 1, 4);
+        ItemStack stackCactus = new ItemStack(Blocks.cactus);
+        ItemStack stackWatermelonBlock = new ItemStack(Blocks.melon_block);
+        ItemStack stackDarkOakSapling = new ItemStack(Blocks.sapling, 1, 5);
+        ItemStack stackLilyPad = new ItemStack(Blocks.waterlily);
+        ItemStack stackSpruceSapling = new ItemStack(Blocks.sapling, 1, 1);
 
         GameRegistry.addRecipe(new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, getUnlocalizedName())),
-                "xxx",
-                "xyx",
-                "xxx",
-                'x', stackJungleSapling,
-                'y', stackEnderPearl);
-
-
+                "abc",
+                "def",
+                "ghi",
+                'a', stackJungleSapling,
+                'b', stackSunflower,
+                'c', stackAcaciaSapling,
+                'd', stackCactus,
+                'e', stackEnderPearl,
+                'f', stackWatermelonBlock,
+                'g', stackDarkOakSapling,
+                'h', stackLilyPad,
+                'i', stackSpruceSapling);
     }
 }
