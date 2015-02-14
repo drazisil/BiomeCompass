@@ -22,15 +22,15 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-public class ItemBiomeCompass1 extends ItemBiomeCompassBase {
+public class ItemBiomeCompassBasic extends ItemBiomeCompassBase {
 
-    public ItemBiomeCompass1() {
+    public ItemBiomeCompassBasic() {
         super();
 
         /*
          Set name
           */
-        setUnlocalizedName(BiomeCompass.MODID + "_biomeCompass_1");
+        setUnlocalizedName(BiomeCompass.MODID + "_biomeCompass_basic");
 
         /*
          Make available in creative mode

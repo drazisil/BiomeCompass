@@ -2,8 +2,9 @@ language.name=English
 language.region=US
 language.code=en_US
 
-item.biomecompass_biomeCompass_1.name=Biome Compass Basic
-item.biomecompass_biomeCompass_2.name=Biome Compass TP
+item.biomecompass_biomeCompass_basic.name=Biome Compass Basic
+item.biomecompass_biomeCompass_enhanced.name=Biome Compass Enhanced
+item.biomecompass_biomeCompass_elite.name=Biome Compass Elite
 item.biomecompass_amalgampearl_flora.name=Flora Amalgam
 item.biomecompass_amalgampearl_fauna.name=Fauna Amalgam
 item.biomecompass_amalgampearl_earthen.name=Earthen Amalgam

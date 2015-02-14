@@ -25,8 +25,9 @@ public class ItemRegistry {
 
         int scanRange = BiomeCompass.proxy.getScanRange();
 
-        GameRegistry.registerItem(new ItemBiomeCompass1().setScanRadius(scanRange), new ItemBiomeCompass1().getUnlocalizedName());
-        GameRegistry.registerItem(new ItemBiomeCompass2().setScanRadius(scanRange), new ItemBiomeCompass2().getUnlocalizedName());
+        GameRegistry.registerItem(new ItemBiomeCompassBasic().setScanRadius(scanRange), new ItemBiomeCompassBasic().getUnlocalizedName());
+        GameRegistry.registerItem(new ItemBiomeCompassEnhanced().setScanRadius(scanRange), new ItemBiomeCompassEnhanced().getUnlocalizedName());
+        GameRegistry.registerItem(new ItemBiomeCompassElite().setScanRadius(scanRange), new ItemBiomeCompassElite().getUnlocalizedName());
 
         /* Registering the amalgam pearls */
         GameRegistry.registerItem(new ItemAmalgamPearlFlora(), new ItemAmalgamPearlFlora().getUnlocalizedName());
@@ -40,12 +41,14 @@ public class ItemRegistry {
         int scanRange = BiomeCompass.proxy.getScanRange();
 
         // Register the compasses
-        ItemBiomeCompassBase itemBiomeCompass1 = new ItemBiomeCompass1().setScanRadius(scanRange);
-        itemBiomeCompass1.registerRecipes();
+        ItemBiomeCompassBase itemBiomeCompassBasic = new ItemBiomeCompassBasic().setScanRadius(scanRange);
+        itemBiomeCompassBasic.registerRecipes();
 
-        ItemBiomeCompassBase itemBiomeCompass2 = new ItemBiomeCompass2().setScanRadius(scanRange);
-        itemBiomeCompass2.registerRecipes();
+        ItemBiomeCompassBase itemBiomeCompassEnhanced = new ItemBiomeCompassEnhanced().setScanRadius(scanRange);
+        itemBiomeCompassEnhanced.registerRecipes();
 
+        ItemBiomeCompassBase itemBiomeCompassElite = new ItemBiomeCompassElite().setScanRadius(scanRange);
+        itemBiomeCompassElite.registerRecipes();
 
         // Register the pearls
         ItemAmalgamPearlFlora itemAmalgamPearlFlora = new ItemAmalgamPearlFlora();

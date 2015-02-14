@@ -23,15 +23,15 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-public class ItemBiomeCompass2 extends ItemBiomeCompassBase {
+public class ItemBiomeCompassEnhanced extends ItemBiomeCompassBase {
 
-    public ItemBiomeCompass2() {
+    public ItemBiomeCompassEnhanced() {
         super();
 
         /*
          Set name
           */
-        setUnlocalizedName(BiomeCompass.MODID + "_biomeCompass_2");
+        setUnlocalizedName(BiomeCompass.MODID + "_biomeCompass_enhanced");
 
         /*
          Make available in creative mode
@@ -51,7 +51,7 @@ public class ItemBiomeCompass2 extends ItemBiomeCompassBase {
     @Override
     public void registerRecipes() {
         super.registerRecipes();
-        ItemBiomeCompass1 itemBiomeCompass1 = new ItemBiomeCompass1();
+        ItemBiomeCompassBasic itemBiomeCompass1 = new ItemBiomeCompassBasic();
         GameRegistry.addRecipe(new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, getUnlocalizedName())),
                 "zxz",
                 "xyx",

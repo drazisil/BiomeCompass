@@ -78,9 +78,9 @@ public class ItemBiomeCompassBase extends Item {
 
                         // Search for biome matching name
                         if ((scanForBiomeMatch(player, getScanRadius(), currentEquippedItemName))
-                                && (equippedItemStack.getItem() instanceof ItemBiomeCompass2)){
+                                && (equippedItemStack.getItem() instanceof ItemBiomeCompassEnhanced)){
                             // if this is a single-use compass, return vanilla compass
-                            ItemBiomeCompass1 itemBiomeCompass1 = new ItemBiomeCompass1();
+                            ItemBiomeCompassBasic itemBiomeCompass1 = new ItemBiomeCompassBasic();
                             return new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, itemBiomeCompass1.getUnlocalizedName())).setStackDisplayName(currentEquippedItemName);
                         }
                     } else {
