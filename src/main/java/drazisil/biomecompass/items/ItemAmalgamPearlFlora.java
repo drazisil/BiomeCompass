@@ -22,14 +22,12 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-public class ItemAmalgamPearlFlora extends  ItemAmalgamPearl{
+public class ItemAmalgamPearlFlora extends  ItemAmalgamPearl
+{
 
-    protected static final Logger logger = LogManager.getLogger("BiomeCompass");
-
-    public ItemAmalgamPearlFlora() {
+    public ItemAmalgamPearlFlora()
+    {
 
         /* Set name */
         setUnlocalizedName(BiomeCompass.MODID + "_amalgampearl_flora");
@@ -42,7 +40,8 @@ public class ItemAmalgamPearlFlora extends  ItemAmalgamPearl{
     }
 
     @Override
-    public void registerRecipes() {
+    public void registerRecipes()
+    {
         super.registerRecipes();
         ItemStack stackEnderPearl = new ItemStack(Items.ender_pearl);
         ItemStack stackJungleSapling = new ItemStack(Blocks.sapling, 1, 3);

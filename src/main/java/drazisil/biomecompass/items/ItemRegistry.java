@@ -19,9 +19,11 @@ package drazisil.biomecompass.items;
 import cpw.mods.fml.common.registry.GameRegistry;
 import drazisil.biomecompass.BiomeCompass;
 
-public class ItemRegistry {
+public class ItemRegistry
+{
 
-    public void registerItems(){
+    public void registerItems()
+    {
 
         int scanRange = BiomeCompass.proxy.getScanRange();
 
@@ -36,7 +38,8 @@ public class ItemRegistry {
         GameRegistry.registerItem(new ItemAmalgamPearlPrecious(), new ItemAmalgamPearlPrecious().getUnlocalizedName());
     }
 
-    public void registerRecipes(){
+    public void registerRecipes()
+    {
 
         int scanRange = BiomeCompass.proxy.getScanRange();
 
@@ -62,6 +65,5 @@ public class ItemRegistry {
 
         ItemAmalgamPearlPrecious itemAmalgamPearlPrecious = new ItemAmalgamPearlPrecious();
         itemAmalgamPearlPrecious.registerRecipes();
-
     }
 }

@@ -22,9 +22,11 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-public class ItemBiomeCompassBasic extends ItemBiomeCompassBase {
+public class ItemBiomeCompassBasic extends ItemBiomeCompassBase
+{
 
-    public ItemBiomeCompassBasic() {
+    public ItemBiomeCompassBasic()
+    {
         super();
 
         /*
@@ -40,7 +42,8 @@ public class ItemBiomeCompassBasic extends ItemBiomeCompassBase {
     }
 
     @Override
-    public void registerRecipes() {
+    public void registerRecipes()
+    {
         super.registerRecipes();
         GameRegistry.addRecipe(new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, getUnlocalizedName())),
                 " x ",

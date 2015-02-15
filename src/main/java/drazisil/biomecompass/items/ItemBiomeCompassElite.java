@@ -21,9 +21,11 @@ import drazisil.biomecompass.BiomeCompass;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
-public class ItemBiomeCompassElite extends ItemBiomeCompassBase {
+public class ItemBiomeCompassElite extends ItemBiomeCompassBase
+{
 
-    public ItemBiomeCompassElite() {
+    public ItemBiomeCompassElite()
+    {
         super();
 
         /*
@@ -50,7 +52,8 @@ public class ItemBiomeCompassElite extends ItemBiomeCompassBase {
     }
 
     @Override
-    public void registerRecipes() {
+    public void registerRecipes()
+    {
         super.registerRecipes();
         ItemBiomeCompassEnhanced itemBiomeCompassEnhanced = new ItemBiomeCompassEnhanced();
         ItemAmalgamPearlFlora itemAmalgamPearlFlora = new ItemAmalgamPearlFlora();
@@ -74,6 +77,4 @@ public class ItemBiomeCompassElite extends ItemBiomeCompassBase {
                 'e', stackAmalgamPrecious);
 
     }
-
-
 }

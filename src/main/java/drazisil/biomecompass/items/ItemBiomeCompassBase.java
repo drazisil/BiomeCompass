@@ -29,7 +29,8 @@ import net.minecraft.world.biome.BiomeGenBase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class ItemBiomeCompassBase extends Item {
+public class ItemBiomeCompassBase extends Item
+{
 
     protected static final Logger logger = LogManager.getLogger("BiomeCompass");
 
@@ -38,7 +39,8 @@ public class ItemBiomeCompassBase extends Item {
 
     private boolean hasTP = false;
 
-    public ItemBiomeCompassBase() {
+    public ItemBiomeCompassBase()
+    {
         // Set name
         setUnlocalizedName(BiomeCompass.MODID + "_biomeCompass");
         // Set texture
@@ -71,8 +73,6 @@ public class ItemBiomeCompassBase extends Item {
                 if (!world.isRemote){
                     if (isValidBiomeName(currentEquippedItemName)){
                         // Valid biome name
-                        logger.info(currentEquippedItemName + " is a valid biome");
-
                         // Search for biome matching name
                         if ((scanForBiomeMatch(player, getScanRadius(), currentEquippedItemName))
                                 && (equippedItemStack.getItem() instanceof ItemBiomeCompassEnhanced)){
@@ -80,14 +80,18 @@ public class ItemBiomeCompassBase extends Item {
                             ItemBiomeCompassBasic itemBiomeCompass1 = new ItemBiomeCompassBasic();
                             return new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, itemBiomeCompass1.getUnlocalizedName())).setStackDisplayName(currentEquippedItemName);
                         }
-                    } else {
+                    }
+                    else
+                    {
                         // Invalid Biome name
                         String msgBiomeCompassInvalidBiomeName = StatCollector.translateToLocalFormatted("strInvalidBiomeName", currentEquippedItemName) ;
 
                         player.addChatMessage(new ChatComponentText(msgBiomeCompassInvalidBiomeName));
                     }
                 }
-            } else {
+            }
+            else
+            {
                 // Does not have a custom name, so 'not activated'
                 player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("strBiomeCompassNotActivated")));
             }
@@ -99,7 +103,8 @@ public class ItemBiomeCompassBase extends Item {
         return scanRadius;
     }
 
-    public ItemBiomeCompassBase setScanRadius(int scanRadius) {
+    public ItemBiomeCompassBase setScanRadius(int scanRadius)
+    {
         this.scanRadius = scanRadius;
         return this;
     }
@@ -114,10 +119,13 @@ public class ItemBiomeCompassBase extends Item {
         // Get an array of all biomes
         BiomeGenBase[] allBiomes = BiomeGenBase.getBiomeGenArray();
 
-        for (BiomeGenBase allBiome : allBiomes) {
-            if (allBiome != null && allBiome != BiomeGenBase.hell) {
+        for (BiomeGenBase allBiome : allBiomes)
+        {
+            if (allBiome != null && allBiome != BiomeGenBase.hell)
+            {
                 String biomeNameI = allBiome.biomeName.toLowerCase();
-                if (biomeNameI.equals(biomeName)) {
+                if (biomeNameI.equals(biomeName))
+                {
                     return true;
                 }
             }
@@ -139,46 +147,50 @@ public class ItemBiomeCompassBase extends Item {
         int centerX = (int) player.posX;
         int centerZ = (int) player.posZ;
 
-        //logger.info("Searching " + scanRadius + " chunks around " + centerX + "," + centerZ + " for a " + requestedBiomeName);
-
-        for(int i=(centerX - (scanRadius * chunkSize)); i<(centerZ + (scanRadius * chunkSize)); i += chunkSize){
-            for(int j=(centerZ - (scanRadius * chunkSize)); j<(centerZ + (scanRadius * chunkSize)); j += chunkSize){
+        for(int i=(centerX - (scanRadius * chunkSize)); i<(centerZ + (scanRadius * chunkSize)); i += chunkSize)
+        {
+            for(int j=(centerZ - (scanRadius * chunkSize)); j<(centerZ + (scanRadius * chunkSize)); j += chunkSize)
+            {
                 String biomeName = world.getBiomeGenForCoords(i, j).biomeName;
-                if (biomeName.toLowerCase().equals(requestedBiomeName)) {
-                    //logger.info("A " + biomeName + " biome was located at " + i + "," + j);
+                if (biomeName.toLowerCase().equals(requestedBiomeName))
+                {
                     player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("strBiomeLocated", biomeName, i, j)));
-                    if (canTp()){
-                        tpPlayertoBiome(player, i, j);
+                    if (canTp())
+                    {
+                        teleportPlayerToBiome(player, i, j);
                     }
                     return true;
                 }
             }
         }
-        logger.info("A "+ requestedBiomeName + " biome was not located within the search radius.");
-        ChatComponentText msg =new ChatComponentText("A "+ requestedBiomeName
-                + " biome was not located within the search radius.");
-        player.addChatMessage(msg);
+        player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("strBiomeNotLocated", requestedBiomeName)));
         return false;
 
     }
 
-    protected void tpPlayertoBiome(EntityPlayer player, int x, int z)
+    /**
+     * Teleports (player) to a safe Y at (X/Z)
+     * @param player EntityPlayer
+     * @param x int
+     * @param z int
+     */
+    protected void teleportPlayerToBiome(EntityPlayer player, int x, int z)
     {
         int safeY = player.getEntityWorld().getTopSolidOrLiquidBlock(x, z);
         if (player.worldObj.getBlock(x, safeY, z).isAir(player.worldObj, x, safeY, z))
         {
-            //logger.info("y=" + safeY + " may be a safe place.");
-            ChatComponentText msg =new ChatComponentText("y=" + safeY + " may be a safe place. Teleporting...");
-            player.addChatMessage(msg);
-            if (!player.getEntityWorld().isRemote){
+            // A safe air block was found
+            player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("strSafeLocation", safeY)));
+            if (!player.getEntityWorld().isRemote)
+            {
                 player.setPositionAndUpdate(x, safeY, z);
             }
 
-        } else {
-            //logger.info("y=" + safeY + " may be a safe place....but it's registered as not air.");
-            ChatComponentText msg =new ChatComponentText("y=" + safeY + " may be a safe place....but it's not identified as air.");
-            player.addChatMessage(msg);
-
+        }
+        else
+        {
+            // A safe Y location was not found
+            player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("strUnsafeLocation", safeY)));
         }
 
     }
@@ -192,5 +204,4 @@ public class ItemBiomeCompassBase extends Item {
     }
 
     public void registerRecipes(){ }
-
 }

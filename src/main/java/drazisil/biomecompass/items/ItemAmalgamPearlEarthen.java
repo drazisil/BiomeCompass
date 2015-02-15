@@ -22,29 +22,26 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-public class ItemAmalgamPearlEarthen extends  ItemAmalgamPearl{
+public class ItemAmalgamPearlEarthen extends  ItemAmalgamPearl
+{
 
-    protected static final Logger logger = LogManager.getLogger("BiomeCompass");
+    public ItemAmalgamPearlEarthen()
+    {
 
-    public ItemAmalgamPearlEarthen() {
+        /* Set name */
+        setUnlocalizedName(BiomeCompass.MODID + "_amalgampearl_earthen");
 
-    /* Set name */
-    setUnlocalizedName(BiomeCompass.MODID + "_amalgampearl_earthen");
+        /* Set texture */
+        setTextureName(BiomeCompass.MODID + ":amalgampearl_earthen");
 
-    /* Set texture */
-    setTextureName(BiomeCompass.MODID + ":amalgampearl_earthen");
-
-     /* Make available in creative mode */
-     setCreativeTab(CreativeTabs.tabMisc);
-
-
+        /* Make available in creative mode */
+        setCreativeTab(CreativeTabs.tabMisc);
     }
 
     @Override
-    public void registerRecipes() {
+    public void registerRecipes()
+    {
         super.registerRecipes();
         ItemStack stackEnderPearl = new ItemStack(Items.ender_pearl);
         ItemStack stackDirt = new ItemStack(Blocks.dirt);
@@ -69,6 +66,5 @@ public class ItemAmalgamPearlEarthen extends  ItemAmalgamPearl{
                 'g', stackSnow,
                 'h', stackSand,
                 'i', stackSandStone);
-
     }
 }

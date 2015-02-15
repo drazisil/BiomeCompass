@@ -13,3 +13,6 @@ item.biomecompass_amalgampearl_precious.name=Precious Amalgam
 strInvalidBiomeName=%s is not a valid biome. Did you spell it correctly?
 strBiomeCompassNotActivated=Please activate your compass by renaming it to the biome you are seeking.
 strBiomeLocated=A %s biome was located at %d, %d
+strBiomeNotLocated=A %s biome was not located within the search radius.
+strSafeLocation=y=%d may be a safe place. Teleporting...
+strUnsafeLocation="y=%d may be a safe place....but it's not identified as air.

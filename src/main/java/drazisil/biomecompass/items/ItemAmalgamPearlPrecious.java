@@ -22,30 +22,27 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-public class ItemAmalgamPearlPrecious extends  ItemAmalgamPearl{
+public class ItemAmalgamPearlPrecious extends  ItemAmalgamPearl
+{
 
-    protected static final Logger logger = LogManager.getLogger("BiomeCompass");
+    public ItemAmalgamPearlPrecious()
+    {
 
-    public ItemAmalgamPearlPrecious() {
+        /* Set name */
+        setUnlocalizedName(BiomeCompass.MODID + "_amalgampearl_precious");
 
-    /* Set name */
-    setUnlocalizedName(BiomeCompass.MODID + "_amalgampearl_precious");
+        /* Set texture */
+        setTextureName(BiomeCompass.MODID + ":amalgampearl_precious");
 
-    /* Set texture */
-    setTextureName(BiomeCompass.MODID + ":amalgampearl_precious");
-
-     /* Make available in creative mode */
-     setCreativeTab(CreativeTabs.tabMisc);
-
-
+        /* Make available in creative mode */
+        setCreativeTab(CreativeTabs.tabMisc);
     }
 
 
     @Override
-    public void registerRecipes() {
+    public void registerRecipes()
+    {
         super.registerRecipes();
         ItemStack stackEnderPearl = new ItemStack(Items.ender_pearl);
         ItemStack stackDiamond = new ItemStack(Items.diamond);

@@ -22,29 +22,25 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-public class ItemAmalgamPearlFauna extends  ItemAmalgamPearl{
+public class ItemAmalgamPearlFauna extends  ItemAmalgamPearl
+{
 
-    protected static final Logger logger = LogManager.getLogger("BiomeCompass");
+    public ItemAmalgamPearlFauna()
+    {
+        /* Set name */
+        setUnlocalizedName(BiomeCompass.MODID + "_amalgampearl_fauna");
 
-    public ItemAmalgamPearlFauna() {
+        /* Set texture */
+        setTextureName(BiomeCompass.MODID + ":amalgampearl_fauna");
 
-    /* Set name */
-    setUnlocalizedName(BiomeCompass.MODID + "_amalgampearl_fauna");
-
-    /* Set texture */
-    setTextureName(BiomeCompass.MODID + ":amalgampearl_fauna");
-
-     /* Make available in creative mode */
-     setCreativeTab(CreativeTabs.tabMisc);
-
-
+        /* Make available in creative mode */
+        setCreativeTab(CreativeTabs.tabMisc);
     }
 
     @Override
-    public void registerRecipes() {
+    public void registerRecipes()
+    {
         super.registerRecipes();
         ItemStack stackEnderPearl = new ItemStack(Items.ender_pearl);
         ItemStack stackLeather = new ItemStack(Items.leather);
@@ -69,7 +65,5 @@ public class ItemAmalgamPearlFauna extends  ItemAmalgamPearl{
                 'g', stackEgg,
                 'h', stackDye,
                 'i', stackSaddle);
-
-
     }
 }
