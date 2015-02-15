@@ -155,8 +155,9 @@ public class ItemBiomeCompassBase extends Item
                 if (biomeName.toLowerCase().equals(requestedBiomeName))
                 {
                     player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("strBiomeLocated", biomeName, i, j)));
-                    if (canTp())
+                    if (canTp() && player.isSneaking())
                     {
+                        // Compass can teleport and player is sneaking
                         teleportPlayerToBiome(player, i, j);
                     }
                     return true;
