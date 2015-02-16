@@ -32,10 +32,11 @@ public class ItemRegistry
         GameRegistry.registerItem(new ItemBiomeCompassElite().setScanRadius(scanRange), new ItemBiomeCompassElite().getUnlocalizedName());
 
         /* Registering the amalgam pearls */
-        GameRegistry.registerItem(new ItemAmalgamPearlFlora(), new ItemAmalgamPearlFlora().getUnlocalizedName());
-        GameRegistry.registerItem(new ItemAmalgamPearlFauna(), new ItemAmalgamPearlFauna().getUnlocalizedName());
-        GameRegistry.registerItem(new ItemAmalgamPearlEarthen(), new ItemAmalgamPearlEarthen().getUnlocalizedName());
-        GameRegistry.registerItem(new ItemAmalgamPearlPrecious(), new ItemAmalgamPearlPrecious().getUnlocalizedName());
+        GameRegistry.registerItem(new ItemAmalgamPearl(), new ItemAmalgamPearl().getUnlocalizedName());
+        //GameRegistry.registerItem(new ItemAmalgamPearlFlora(), new ItemAmalgamPearlFlora().getUnlocalizedName());
+        //GameRegistry.registerItem(new ItemAmalgamPearlFauna(), new ItemAmalgamPearlFauna().getUnlocalizedName());
+        //GameRegistry.registerItem(new ItemAmalgamPearlEarthen(), new ItemAmalgamPearlEarthen().getUnlocalizedName());
+        //GameRegistry.registerItem(new ItemAmalgamPearlPrecious(), new ItemAmalgamPearlPrecious().getUnlocalizedName());
     }
 
     public void registerRecipes()
@@ -54,6 +55,10 @@ public class ItemRegistry
         itemBiomeCompassElite.registerRecipes();
 
         // Register the pearls
+        ItemAmalgamPearl itemAmalgamPearl = new ItemAmalgamPearl();
+        itemAmalgamPearl.registerRecipes();
+
+/*
         ItemAmalgamPearlFlora itemAmalgamPearlFlora = new ItemAmalgamPearlFlora();
         itemAmalgamPearlFlora.registerRecipes();
 
@@ -65,5 +70,6 @@ public class ItemRegistry
 
         ItemAmalgamPearlPrecious itemAmalgamPearlPrecious = new ItemAmalgamPearlPrecious();
         itemAmalgamPearlPrecious.registerRecipes();
+*/
     }
 }

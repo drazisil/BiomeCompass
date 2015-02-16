@@ -29,7 +29,7 @@ public class BiomeCompass
 {
     public static final String MODID = "biomecompass";
     public static final String NAME = "Biome Compass";
-    public static final String VERSION = "1.5";
+    public static final String VERSION = "1.5.5";
 
     @SidedProxy(clientSide = "drazisil.biomecompass.proxy.BCClientProxy", serverSide = "drazisil.biomecompass.proxy.BCDedicatedServerProxy")
     public static BCCommonProxy proxy;
