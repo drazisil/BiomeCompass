@@ -116,6 +116,8 @@ public class ItemBiomeCompassBase extends Item
      */
     private boolean isValidBiomeName(String biomeName)
     {
+        biomeName = biomeName.toLowerCase();
+
         // Get an array of all biomes
         BiomeGenBase[] allBiomes = BiomeGenBase.getBiomeGenArray();
 
@@ -144,27 +146,37 @@ public class ItemBiomeCompassBase extends Item
     {
         int chunkSize = 16;
         World world = player.getEntityWorld();
-        int centerX = (int) player.posX;
-        int centerZ = (int) player.posZ;
 
-        for(int i=(centerX - (scanRadius * chunkSize)); i<(centerZ + (scanRadius * chunkSize)); i += chunkSize)
-        {
-            for(int j=(centerZ - (scanRadius * chunkSize)); j<(centerZ + (scanRadius * chunkSize)); j += chunkSize)
-            {
-                String biomeName = world.getBiomeGenForCoords(i, j).biomeName;
-                if (biomeName.toLowerCase().equals(requestedBiomeName))
-                {
-                    player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("strBiomeLocated", biomeName, i, j)));
-                    if (canTp() && player.isSneaking())
-                    {
-                        // Compass can teleport and player is sneaking
-                        teleportPlayerToBiome(player, i, j);
+        if (!world.isRemote) {
+
+            int centerX = player.chunkCoordX;
+            int centerZ = player.chunkCoordZ;
+
+            requestedBiomeName = requestedBiomeName.toLowerCase();
+
+            //logger.info("Scanning " + scanRadius + " for " + requestedBiomeName + " starting at " + centerX + "/" + centerZ);
+
+            for (int i = (centerX - (scanRadius * chunkSize)); i < (centerZ + (scanRadius * chunkSize)); i += chunkSize) {
+                //logger.info("x=" + i);
+                for (int j = (centerZ - (scanRadius * chunkSize)); j < (centerZ + (scanRadius * chunkSize)); j += chunkSize) {
+                    //logger.info("z=" + j);
+                    String biomeName = world.getBiomeGenForCoords(i, j).biomeName.toLowerCase();
+                    //logger.info(requestedBiomeName + " = " + biomeName);
+                    if (biomeName.equals(requestedBiomeName)) {
+                        player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("strBiomeLocated", biomeName, i, j)));
+                        if (canTp() && player.isSneaking()) {
+                            // Compass can teleport and player is sneaking
+                            if (teleportPlayerToBiome(player, i, j)){
+                                return true;
+                            }
+                        }
+                        return false;
                     }
-                    return true;
                 }
             }
+            player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("strBiomeNotLocated", requestedBiomeName)));
+            return false;
         }
-        player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("strBiomeNotLocated", requestedBiomeName)));
         return false;
 
     }
@@ -175,7 +187,7 @@ public class ItemBiomeCompassBase extends Item
      * @param x int
      * @param z int
      */
-    protected void teleportPlayerToBiome(EntityPlayer player, int x, int z)
+    protected boolean teleportPlayerToBiome(EntityPlayer player, int x, int z)
     {
         int safeY = player.getEntityWorld().getTopSolidOrLiquidBlock(x, z);
         if (player.worldObj.getBlock(x, safeY, z).isAir(player.worldObj, x, safeY, z))
@@ -185,6 +197,7 @@ public class ItemBiomeCompassBase extends Item
             if (!player.getEntityWorld().isRemote)
             {
                 player.setPositionAndUpdate(x, safeY, z);
+                return true;
             }
 
         }
@@ -192,7 +205,9 @@ public class ItemBiomeCompassBase extends Item
         {
             // A safe Y location was not found
             player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("strUnsafeLocation", safeY)));
+            return false;
         }
+        return false;
 
     }
 
