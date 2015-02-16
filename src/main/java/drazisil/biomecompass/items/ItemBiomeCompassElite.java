@@ -56,25 +56,21 @@ public class ItemBiomeCompassElite extends ItemBiomeCompassBase
     {
         super.registerRecipes();
         ItemBiomeCompassEnhanced itemBiomeCompassEnhanced = new ItemBiomeCompassEnhanced();
-        ItemAmalgamPearlFlora itemAmalgamPearlFlora = new ItemAmalgamPearlFlora();
-        ItemAmalgamPearlFauna itemAmalgamPearlFauna = new ItemAmalgamPearlFauna();
-        ItemAmalgamPearlEarthen itemAmalgamPearlEarthen = new ItemAmalgamPearlEarthen();
-        ItemAmalgamPearlPrecious itemAmalgamPearlPrecious = new ItemAmalgamPearlPrecious();
+        ItemStack stackAmalgamPearlFlora = new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, new ItemAmalgamPearl().getUnlocalizedName()), 1, 0);
+        ItemStack stackAmalgamPearlFauna = new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, new ItemAmalgamPearl().getUnlocalizedName()), 1, 1);
+        ItemStack stackAmalgamPearlEarthen = new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, new ItemAmalgamPearl().getUnlocalizedName()), 1, 2);
+        ItemStack stackAmalgamPearlPrecious = new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, new ItemAmalgamPearl().getUnlocalizedName()), 1, 3);
         ItemStack stackBiomeCompassEnhanced = new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, itemBiomeCompassEnhanced.getUnlocalizedName()));
-        ItemStack stackAmalgamFlora = new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, itemAmalgamPearlFlora.getUnlocalizedName()));
-        ItemStack stackAmalgamFauna = new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, itemAmalgamPearlFauna.getUnlocalizedName()));
-        ItemStack stackAmalgamEarthen = new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, itemAmalgamPearlEarthen.getUnlocalizedName()));
-        ItemStack stackAmalgamPrecious = new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, itemAmalgamPearlPrecious.getUnlocalizedName()));
 
         GameRegistry.addRecipe(new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, getUnlocalizedName())),
                 " a ",
                 "bcd",
                 " e ",
-                'a', stackAmalgamFlora,
-                'b', stackAmalgamFauna,
+                'a', stackAmalgamPearlFlora,
+                'b', stackAmalgamPearlFauna,
                 'c', stackBiomeCompassEnhanced,
-                'd', stackAmalgamEarthen,
-                'e', stackAmalgamPrecious);
+                'd', stackAmalgamPearlEarthen,
+                'e', stackAmalgamPearlPrecious);
 
     }
 }

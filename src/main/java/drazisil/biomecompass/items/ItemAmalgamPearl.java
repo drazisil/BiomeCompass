@@ -70,6 +70,7 @@ public class ItemAmalgamPearl extends Item {
     }
 
     public void registerRecipes() {
+        // Flora
         ItemStack stackEnderPearl = new ItemStack(Items.ender_pearl);
         ItemStack stackJungleSapling = new ItemStack(Blocks.sapling, 1, 3);
         ItemStack stackSunflower = new ItemStack(Blocks.double_plant);
@@ -93,6 +94,80 @@ public class ItemAmalgamPearl extends Item {
                 'g', stackDarkOakSapling,
                 'h', stackLilyPad,
                 'i', stackSpruceSapling);
+
+        // Fauna
+        ItemStack stackLeather = new ItemStack(Items.leather);
+        ItemStack stackFish = new ItemStack(Items.fish);
+        ItemStack stackPorkChop = new ItemStack(Items.porkchop);
+        ItemStack stackWool = new ItemStack(Blocks.wool);
+        ItemStack stackBone = new ItemStack(Items.bone);
+        ItemStack stackEgg = new ItemStack(Items.egg);
+        ItemStack stackDye = new ItemStack(Items.dye);
+        ItemStack stackSaddle = new ItemStack(Items.saddle);
+
+        GameRegistry.addRecipe(new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, getUnlocalizedName()), 1, 1),
+                "abc",
+                "def",
+                "ghi",
+                'a', stackLeather,
+                'b', stackFish,
+                'c', stackPorkChop,
+                'd', stackWool,
+                'e', stackEnderPearl,
+                'f', stackBone,
+                'g', stackEgg,
+                'h', stackDye,
+                'i', stackSaddle);
+
+        //Earthen
+        ItemStack stackDirt = new ItemStack(Blocks.dirt);
+        ItemStack stackGravel = new ItemStack(Blocks.gravel);
+        ItemStack stackClay = new ItemStack(Blocks.clay);
+        ItemStack stackGrass = new ItemStack(Blocks.grass);
+        ItemStack stackStone = new ItemStack(Blocks.stone);
+        ItemStack stackSnow = new ItemStack(Blocks.snow);
+        ItemStack stackSand = new ItemStack(Blocks.sand);
+        ItemStack stackSandStone = new ItemStack(Blocks.sandstone);
+
+        GameRegistry.addRecipe(new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, getUnlocalizedName()), 1, 2),
+                "abc",
+                "def",
+                "ghi",
+                'a', stackDirt,
+                'b', stackGravel,
+                'c', stackClay,
+                'd', stackGrass,
+                'e', stackEnderPearl,
+                'f', stackStone,
+                'g', stackSnow,
+                'h', stackSand,
+                'i', stackSandStone);
+
+        // Precious
+        ItemStack stackDiamond = new ItemStack(Items.diamond);
+        ItemStack stackObsidian = new ItemStack(Blocks.obsidian);
+        ItemStack stackGoldIngot = new ItemStack(Items.gold_ingot);
+        ItemStack stackRedstoneBlock = new ItemStack(Blocks.redstone_block);
+        ItemStack stackLapisBlock = new ItemStack(Blocks.lapis_block);
+        ItemStack stackIronIngot = new ItemStack(Items.iron_ingot);
+        ItemStack stackCoalBlock = new ItemStack(Blocks.coal_block);
+        ItemStack stackEmerald = new ItemStack(Items.emerald);
+
+        GameRegistry.addRecipe(new ItemStack(GameRegistry.findItem(BiomeCompass.MODID, getUnlocalizedName()), 1, 3),
+                "abc",
+                "def",
+                "ghi",
+                'a', stackDiamond,
+                'b', stackObsidian,
+                'c', stackGoldIngot,
+                'd', stackRedstoneBlock,
+                'e', stackEnderPearl,
+                'f', stackLapisBlock,
+                'g', stackIronIngot,
+                'h', stackCoalBlock,
+                'i', stackEmerald);
+
+
     }
 
     @Override
