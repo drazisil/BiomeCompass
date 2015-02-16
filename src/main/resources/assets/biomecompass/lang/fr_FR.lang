@@ -3,3 +3,16 @@ language.region=FR
 language.code=fr_FR
 
 item.biomecompass_biomeCompass_basic.name=Boussole à biome de base
+item.biomecompass_biomeCompass_enhanced.name=Boussole à biome avancée
+item.biomecompass_biomeCompass_elite.name=Boussole à biome d'élite
+item.biomecompass_amalgampearl_flora.name=Amalgam flore
+item.biomecompass_amalgampearl_fauna.name=Amalgam faune
+item.biomecompass_amalgampearl_earthen.name=Amalgam de terre
+item.biomecompass_amalgampearl_precious.name=Amalgam précieux
+
+strInvalidBiomeName=%s n'est pas un biome valide. L'avez-vous correctement écrit ?
+strBiomeCompassNotActivated=Veuillez activer votre boussole en la renommant du biomme que vous cherchez.
+strBiomeLocated=Un biome %s a été localisé à %d, %d
+strBiomeNotLocated=Un biome %s n'a pas été localisé dans le rayon de recherche.
+strSafeLocation=y=%d may be a safe place. Teleporting...
+strUnsafeLocation="y=%d may be a safe place....but it's not identified as air.
