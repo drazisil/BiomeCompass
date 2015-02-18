@@ -18,16 +18,23 @@ package drazisil.biomecompass.items;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import drazisil.biomecompass.BiomeCompass;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Random;
 
 public class ItemBiomeCompassBase extends Item
 {
@@ -38,6 +45,9 @@ public class ItemBiomeCompassBase extends Item
     private int scanRadius = 1;
 
     private boolean hasTP = false;
+
+    /** RNG for World. */
+    public Random rand = new Random();
 
     public ItemBiomeCompassBase()
     {
@@ -157,16 +167,19 @@ public class ItemBiomeCompassBase extends Item
             //logger.info("Scanning " + scanRadius + " for " + requestedBiomeName + " starting at " + centerX + "/" + centerZ);
 
             for (int i = (centerX - (scanRadius * chunkSize)); i < (centerZ + (scanRadius * chunkSize)); i += chunkSize) {
-                //logger.info("x=" + i);
+                logger.info("x=" + i);
                 for (int j = (centerZ - (scanRadius * chunkSize)); j < (centerZ + (scanRadius * chunkSize)); j += chunkSize) {
-                    //logger.info("z=" + j);
+                    logger.info("z=" + j);
                     String biomeName = world.getBiomeGenForCoords(i, j).biomeName.toLowerCase();
-                    //logger.info(requestedBiomeName + " = " + biomeName);
+                    logger.info(requestedBiomeName + " = " + biomeName);
                     if (biomeName.equals(requestedBiomeName)) {
-                        player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("strBiomeLocated", biomeName, i, j)));
+                        ChunkCoordinates playerCoordinates = getSafeLocation(player, i, j);
+                        logger.info("Location = " + playerCoordinates.posX + "," + playerCoordinates.posY + "," + playerCoordinates.posZ);
+
+                        player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("strBiomeLocated", biomeName, playerCoordinates.posX, playerCoordinates.posZ)));
                         if (canTp() && player.isSneaking()) {
                             // Compass can teleport and player is sneaking
-                            if (teleportPlayerToBiome(player, i, j)){
+                            if (teleportPlayerToBiome(player, playerCoordinates)){
                                 return true;
                             }
                         }
@@ -184,19 +197,17 @@ public class ItemBiomeCompassBase extends Item
     /**
      * Teleports (player) to a safe Y at (X/Z)
      * @param player EntityPlayer
-     * @param x int
-     * @param z int
      */
-    protected boolean teleportPlayerToBiome(EntityPlayer player, int x, int z)
+    protected boolean teleportPlayerToBiome(EntityPlayer player, ChunkCoordinates playerCoordinates)
     {
-        int safeY = player.getEntityWorld().getTopSolidOrLiquidBlock(x, z);
-        if (player.worldObj.getBlock(x, safeY, z).isAir(player.worldObj, x, safeY, z))
+        if (player.worldObj.getBlock(playerCoordinates.posX, playerCoordinates.posY, playerCoordinates.posZ).isAir(player.worldObj, playerCoordinates.posX, playerCoordinates.posY, playerCoordinates.posZ))
         {
             // A safe air block was found
-            player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("strSafeLocation", safeY)));
+            player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("strSafeLocation", playerCoordinates.posY)));
             if (!player.getEntityWorld().isRemote)
             {
-                player.setPositionAndUpdate(x, safeY, z);
+                Block aPlayerworldObjBlock = player.worldObj.getBlock(playerCoordinates.posX, playerCoordinates.posY, playerCoordinates.posZ);
+                player.setPositionAndUpdate(playerCoordinates.posX, playerCoordinates.posY, playerCoordinates.posZ);
                 return true;
             }
 
@@ -204,11 +215,53 @@ public class ItemBiomeCompassBase extends Item
         else
         {
             // A safe Y location was not found
-            player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("strUnsafeLocation", safeY)));
+            player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("strUnsafeLocation", playerCoordinates.posY)));
             return false;
         }
         return false;
 
+    }
+
+    @SideOnly(Side.CLIENT)
+    public ChunkCoordinates getSafeLocation(EntityPlayer player, int x, int z)
+    {
+        World world = player.worldObj;
+        ChunkCoordinates returnCoordinates = new ChunkCoordinates();
+
+        returnCoordinates.posY = 64;
+
+        int i = x;
+        int j = z;
+        int k = 0;
+
+        while (world.getTopBlock(i, j).getMaterial() == Material.air)
+        {
+            i += this.rand.nextInt(8) - this.rand.nextInt(8);
+            j += this.rand.nextInt(8) - this.rand.nextInt(8);
+            ++k;
+
+            if (k == 10000)
+            {
+                break;
+            }
+        }
+        returnCoordinates.posX = i;
+        returnCoordinates.posZ = j;
+
+            while (returnCoordinates.posY >= 0.0D)
+            {
+                if ((world.getBlock(returnCoordinates.posX, returnCoordinates.posY, returnCoordinates.posZ).getMaterial() == Material.air)
+                && (world.getBlock(returnCoordinates.posX, returnCoordinates.posY+1, returnCoordinates.posZ).getMaterial() == Material.air))
+                {
+                    break;
+                }
+
+                returnCoordinates.posY++;
+
+            }
+
+
+        return returnCoordinates;
     }
 
     public boolean canTp() {

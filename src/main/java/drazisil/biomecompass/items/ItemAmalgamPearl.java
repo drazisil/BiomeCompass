@@ -195,7 +195,7 @@ public class ItemAmalgamPearl extends Item {
     /**
      * Gets an icon index based on an item's damage value
      *
-     * @param meta ingt
+     * @param meta int
      */
     @Override
     public IIcon getIconFromDamage(int meta) {
