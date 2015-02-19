@@ -16,13 +16,13 @@
 
 package drazisil.biomecompass;
 
-import drazisil.biomecompass.proxy.BCCommonProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import drazisil.biomecompass.proxy.BCCommonProxy;
 
 @Mod(modid = BiomeCompass.MODID, name = BiomeCompass.NAME, version = BiomeCompass.VERSION)
 public class BiomeCompass

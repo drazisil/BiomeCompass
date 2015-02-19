@@ -21,6 +21,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import drazisil.biomecompass.BiomeCompass;
+import drazisil.biomecompass.util.DebugLogger;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,16 +32,13 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.Random;
 
 public class ItemBiomeCompassBase extends Item
 {
 
-    protected static final Logger logger = LogManager.getLogger("BiomeCompass");
-
+    private final DebugLogger logger = new DebugLogger(BiomeCompass.MODID);
     // This gets overridden in implementations
     private int scanRadius = 1;
 
@@ -73,7 +71,7 @@ public class ItemBiomeCompassBase extends Item
         // Only run on server
         if (player.getCurrentEquippedItem() != null && FMLCommonHandler.instance().getEffectiveSide().isServer())
         {
-            logger.info("Clicked with Biome Compass");
+            logger.logInfo("Clicked with Biome Compass");
 
             // Check for custom name
             if (!equippedItemStack.getDisplayName().equals(equippedItemStack.getItem().getItemStackDisplayName(equippedItemStack))){
@@ -159,22 +157,22 @@ public class ItemBiomeCompassBase extends Item
 
         if (!world.isRemote) {
 
-            int centerX = player.chunkCoordX;
-            int centerZ = player.chunkCoordZ;
+            int centerX = (int) player.posX;
+            int centerZ = (int) player.posZ;
 
             requestedBiomeName = requestedBiomeName.toLowerCase();
 
-            //logger.info("Scanning " + scanRadius + " for " + requestedBiomeName + " starting at " + centerX + "/" + centerZ);
+            logger.logInfo("Scanning " + scanRadius + " for " + requestedBiomeName + " starting at " + centerX + "/" + centerZ);
 
             for (int i = (centerX - (scanRadius * chunkSize)); i < (centerZ + (scanRadius * chunkSize)); i += chunkSize) {
-                logger.info("x=" + i);
+                logger.logInfo("x=" + i);
                 for (int j = (centerZ - (scanRadius * chunkSize)); j < (centerZ + (scanRadius * chunkSize)); j += chunkSize) {
-                    logger.info("z=" + j);
+                    logger.logInfo("z=" + j);
                     String biomeName = world.getBiomeGenForCoords(i, j).biomeName.toLowerCase();
-                    logger.info(requestedBiomeName + " = " + biomeName);
+                    logger.logInfo(requestedBiomeName + " = " + biomeName);
                     if (biomeName.equals(requestedBiomeName)) {
                         ChunkCoordinates playerCoordinates = getSafeLocation(player, i, j);
-                        logger.info("Location = " + playerCoordinates.posX + "," + playerCoordinates.posY + "," + playerCoordinates.posZ);
+                        logger.logInfo("Location = " + playerCoordinates.posX + "," + playerCoordinates.posY + "," + playerCoordinates.posZ);
 
                         player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("strBiomeLocated", biomeName, playerCoordinates.posX, playerCoordinates.posZ)));
                         if (canTp() && player.isSneaking()) {
@@ -248,18 +246,17 @@ public class ItemBiomeCompassBase extends Item
         returnCoordinates.posX = i;
         returnCoordinates.posZ = j;
 
-            while (returnCoordinates.posY >= 0.0D)
+        while (returnCoordinates.posY >= 0.0D)
+        {
+            if ((world.getBlock(returnCoordinates.posX, returnCoordinates.posY, returnCoordinates.posZ).getMaterial() == Material.air)
+                    && (world.getBlock(returnCoordinates.posX, returnCoordinates.posY+1, returnCoordinates.posZ).getMaterial() == Material.air))
             {
-                if ((world.getBlock(returnCoordinates.posX, returnCoordinates.posY, returnCoordinates.posZ).getMaterial() == Material.air)
-                && (world.getBlock(returnCoordinates.posX, returnCoordinates.posY+1, returnCoordinates.posZ).getMaterial() == Material.air))
-                {
-                    break;
-                }
-
-                returnCoordinates.posY++;
-
+                break;
             }
 
+            returnCoordinates.posY++;
+
+        }
 
         return returnCoordinates;
     }

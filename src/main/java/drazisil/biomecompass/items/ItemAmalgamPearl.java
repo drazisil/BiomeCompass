@@ -19,6 +19,7 @@ package drazisil.biomecompass.items;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import drazisil.biomecompass.BiomeCompass;
+import drazisil.biomecompass.util.DebugLogger;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,16 +29,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public class ItemAmalgamPearl extends Item {
 
+    private final DebugLogger logger = new DebugLogger(BiomeCompass.MODID);
     public IIcon[] icons = new IIcon[4];
-
-    protected static final Logger logger = LogManager.getLogger("BiomeCompass");
 
     public ItemAmalgamPearl() {
         super();

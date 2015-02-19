@@ -35,6 +35,16 @@ public class BCCommonProxy {
 
     private int scanRange;
 
+    public boolean isDebugging() {
+        return debugging;
+    }
+
+    public void setDebugging(boolean debugging) {
+        this.debugging = debugging;
+    }
+
+    private boolean debugging;
+
     public void preInit(FMLPreInitializationEvent event) {
         // Not currently using events at the global level, but leaving the code for reference
         //FMLCommonHandler.instance().bus().register(events);
@@ -45,7 +55,8 @@ public class BCCommonProxy {
 
         config.load();
 
-        setScanRange(config.get("general", "scanRange_1", 25).getInt(25));
+        setScanRange(config.get("general", "scanRange", 25).getInt(25));
+        setDebugging(config.get("general", "debugging", false).getBoolean(false));
         config.save();
 
         ItemRegistry itemRegistry = new ItemRegistry();
