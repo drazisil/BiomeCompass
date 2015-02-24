@@ -30,22 +30,15 @@
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="cpw.mods.fml.common.Mod.EventHandler" />
-      <item index="1" class="java.lang.String" itemvalue="cpw.mods.fml.common.eventhandler.SubscribeEvent" />
-    </list>
-  </component>
-  <component name="FrameworkDetectionExcludesConfiguration">
-    <file type="web" url="file://$PROJECT_DIR$" />
   </component>
   <component name="GradleLocalSettings">
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="1421989952000" />
+        <entry key="$PROJECT_DIR$" value="1424380178232" />
       </map>
     </option>
   </component>
-  <component name="IdProvider" IDEtalkID="1915C52428B01CFCE7A354752E9114C0" />
+  <component name="IdProvider" IDEtalkID="C750DE8C07BD82E299148D558BDEF89B" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />

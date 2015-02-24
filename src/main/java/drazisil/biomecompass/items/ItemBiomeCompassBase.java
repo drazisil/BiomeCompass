@@ -164,7 +164,7 @@ public class ItemBiomeCompassBase extends Item
 
             logger.logInfo("Scanning " + scanRadius + " for " + requestedBiomeName + " starting at " + centerX + "/" + centerZ);
 
-            for (int i = (centerX - (scanRadius * chunkSize)); i < (centerZ + (scanRadius * chunkSize)); i += chunkSize) {
+            for (int i = (centerX - (scanRadius * chunkSize)); i < (centerX + (scanRadius * chunkSize)); i += chunkSize) {
                 logger.logInfo("x=" + i);
                 for (int j = (centerZ - (scanRadius * chunkSize)); j < (centerZ + (scanRadius * chunkSize)); j += chunkSize) {
                     logger.logInfo("z=" + j);
@@ -198,13 +198,15 @@ public class ItemBiomeCompassBase extends Item
      */
     protected boolean teleportPlayerToBiome(EntityPlayer player, ChunkCoordinates playerCoordinates)
     {
-        if (player.worldObj.getBlock(playerCoordinates.posX, playerCoordinates.posY, playerCoordinates.posZ).isAir(player.worldObj, playerCoordinates.posX, playerCoordinates.posY, playerCoordinates.posZ))
+        World world = player.worldObj;
+        if (world.getBlock(playerCoordinates.posX, playerCoordinates.posY, playerCoordinates.posZ).isAir(world, playerCoordinates.posX, playerCoordinates.posY, playerCoordinates.posZ))
         {
             // A safe air block was found
             player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("strSafeLocation", playerCoordinates.posY)));
             if (!player.getEntityWorld().isRemote)
             {
-                Block aPlayerworldObjBlock = player.worldObj.getBlock(playerCoordinates.posX, playerCoordinates.posY, playerCoordinates.posZ);
+                Block aPlayerworldObjBlock = world.getBlock(playerCoordinates.posX, playerCoordinates.posY, playerCoordinates.posZ);
+
                 player.setPositionAndUpdate(playerCoordinates.posX, playerCoordinates.posY, playerCoordinates.posZ);
                 return true;
             }
@@ -220,7 +222,7 @@ public class ItemBiomeCompassBase extends Item
 
     }
 
-    @SideOnly(Side.CLIENT)
+    @SideOnly(Side.SERVER)
     public ChunkCoordinates getSafeLocation(EntityPlayer player, int x, int z)
     {
         World world = player.worldObj;
